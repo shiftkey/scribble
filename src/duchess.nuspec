@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>duchess</id>
+    <version>0.1.0</version>
+    <authors>Brendan Forster</authors>
+    <owners>Brendan Forster</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <projectUrl>https://github.com/shiftkey/duchess</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A highly-opinionated documentation tool for .NET projects</description>
+    <releaseNotes>This package does nothing yet</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>duchess documentation docs</tags>
+  </metadata>
+</package>
