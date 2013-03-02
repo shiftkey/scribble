@@ -2,10 +2,10 @@
 <package >
   <metadata>
     <id>duchess</id>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <authors>Brendan Forster</authors>
     <owners>Brendan Forster</owners>
-    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <licenseUrl>https://raw.github.com/shiftkey/duchess/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/shiftkey/duchess</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
