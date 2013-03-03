@@ -11,7 +11,7 @@ function FindRootFolder {
 
     $root_dir = $null
     $current_dir = $toolsPath
-    $depth_from_tool_path = 5 # how deep should we go?
+    $depth_from_tool_path = 7 # how deep should we go?
 
     do {
 	    $current_dir = (Get-Item $current_dir).Parent.FullName
@@ -34,12 +34,11 @@ function FindRootFolder {
             $root_dir = $current_dir
         }
 	
-        Write-Host "Nothing interesting found at $current_dir"
-
 	    $depth_from_tool_path--
     } while ($depth_from_tool_path -gt 0 -and $root_dir -eq $null)
 
     if ($root_dir -ne $null)  {
+    	Write-Host "We found a source code directory, so we'll put the docs in the same location"
         return $root_dir
     } else { 
     	Write-Host "No source code folder found, using solution directory"
@@ -49,6 +48,9 @@ function FindRootFolder {
 
 # get the "project" root folder
 $project_root = (FindRootFolder);
+
+Write-Host "Installing docs folder inside $project_root"
+
 $docs_folder = Join-Path -Path $project_root "docs"
 $metafile = Join-Path -Path $docs_folder ".duchess"
 $version = $package.Version.Version.ToString()
