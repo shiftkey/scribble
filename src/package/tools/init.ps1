@@ -88,3 +88,6 @@ else {
 }
 
 # TODO: hook in any other commands
+
+# launch ze missiles
+powershell -File "_pretzel\_Launch_Docs.ps1" -DocsRoot $docs_folder
