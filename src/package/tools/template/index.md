@@ -1,3 +1,7 @@
+---
+title: duchess
+---
+
 # Welcome to Duchess
 
 ## Introduction
