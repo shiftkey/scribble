@@ -57,17 +57,18 @@ $version = $package.Version.Version.ToString()
 
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
-	# create folder
+    # create folder
 	$templatePath = Join-Path -Path $toolsPath "template\*"
 
 	# populate folder with template contents
+    New-Item -ItemType directory -Path $docs_folder
 	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse
 
 	# dump the package version to a metafile
-	$version | Out-File $metafile
+    $version | Out-File $metafile
 
 	# open the file in Visual Studio
-	$index = Join-Path -Path $docs_folder "index.md"
+    $index = Join-Path -Path $docs_folder "index.md"
 	$dte.ItemOperations.OpenFile($index)
 }
 else {
@@ -90,4 +91,5 @@ else {
 # TODO: hook in any other commands
 
 # launch ze missiles
-powershell -File "_pretzel\_Launch_Docs.ps1" -DocsRoot $docs_folder
+$launch_script = Join-Path -Path $toolsPath "_pretzel\Launch-Docs.ps1"
+powershell -File $launch_script -DocsRoot $docs_folder

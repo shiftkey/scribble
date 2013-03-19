@@ -1,5 +1,5 @@
 Param(
-  [string]$DocsRoot,
+  [string]$DocsRoot
 )
 
 Set-StrictMode -Version Latest

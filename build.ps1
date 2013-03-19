@@ -9,4 +9,4 @@ $basePath = Join-Path (Get-ScriptDirectory) src\package
 
 $nuget = Join-Path (Get-ScriptDirectory) tools\NuGet.exe
 
-. $nuget pack $nuspec -BasePath $basePath -OutputDir (Get-ScriptDirectory)
+. $nuget pack $nuspec -BasePath $basePath -OutputDir D:\Code\packages\
