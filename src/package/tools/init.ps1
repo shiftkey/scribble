@@ -46,6 +46,14 @@ function FindRootFolder {
     }
 }
 
+function Setup-FolderStructure {
+    Write-Host "First time setup of documentation"
+}
+
+function Upgrade-FolderStructure {
+    Write-Host "Existing documentation folder already found"
+}
+
 # get the "project" root folder
 $project_root = (FindRootFolder);
 
@@ -57,12 +65,15 @@ $version = $package.Version.Version.ToString()
 
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
+
+    Setup-FolderStructure
+    
     # create folder
 	$templatePath = Join-Path -Path $toolsPath "template\*"
 
 	# populate folder with template contents
     New-Item -ItemType directory -Path $docs_folder
-	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse
+	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse | Out-Null
 
 	# dump the package version to a metafile
     $version | Out-File $metafile
@@ -70,22 +81,26 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 	# open the file in Visual Studio
     $index = Join-Path -Path $docs_folder "index.md"
 	$dte.ItemOperations.OpenFile($index)
-}
-else {
-	# if we have a different version installed, this is an upgrade
-	$installed_version = $null
 
-	if ([IO.File]::Exists($metafile) -eq $false) {
-		$installed_version = "i have no idea"
-	} else {
+} else {  
+
+	$installed_version = $null
+	if ([IO.File]::Exists($metafile) -eq $true) {
 		$installed_version = Get-Content $metafile | Out-String
-	}
+    }
 
 	if ($installed_version -ne $package) {
-		# update the version 
-		Remove-Item $metafile
+        
+        Upgrade-FolderStructure
+
+		# update the version stored in the docs folder
+        if ([IO.File]::Exists($metafile) -eq $true) {
+            Remove-Item $metafile
+        }
 		$version | Out-File $metafile	
-	}
+	} else {
+        Write-Host "No changes necessary, you've got the latest code"
+    }
 }
 
 # TODO: hook in any other commands
