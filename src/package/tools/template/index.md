@@ -1,5 +1,6 @@
 ---
 title: duchess
+layout: default
 ---
 
 # Welcome to Duchess
