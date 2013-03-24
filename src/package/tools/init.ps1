@@ -75,8 +75,7 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     New-Item -ItemType directory -Path $docs_folder
 	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse | Out-Null
 
-    # $port =  Get-Random -Minimum 30000 -Maximum 50000
-    $port = 40000
+    $port =  Get-Random -Minimum 30000 -Maximum 50000
     
 	# dump the version and created port to the config file
     $properties = @{}
