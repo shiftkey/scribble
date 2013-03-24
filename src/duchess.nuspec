@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>scribble</id>
-    <version>0.1.3.3-pre</version>
+    <version>0.1.3.4-pre</version>
     <authors>Brendan Forster</authors>
     <owners>Brendan Forster</owners>
     <licenseUrl>https://raw.github.com/shiftkey/duchess/master/LICENSE.md</licenseUrl>
