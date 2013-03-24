@@ -5,7 +5,7 @@ function FindRootFolder {
     $solution_path = $dte.Solution.FullName
     $solution_dir = (get-item $solution_path).Directory.FullName
 
-    Write-Host "Defaulting to $solution_dir if we can't find a source control folder"
+    Write-Debug "Defaulting to $solution_dir if we can't find a source control folder"
 
     # best case scenario, we dump this in the root of the repository, which we get by looking for .git or .hg
 
@@ -18,19 +18,19 @@ function FindRootFolder {
         
         if ([IO.Directory]::Exists($current_dir) -eq $false)
         {
-        	Write-Host "We can't go further, bailing out"
+        	Write-Debug "We can't go further, bailing out"
             break;
         }
 
         if ([IO.Directory]::Exists((Join-Path -Path $current_dir ".git")))
         {
-            Write-Host "Found a .git folder at $current_dir!"
+            Write-Debug "Found a .git folder at $current_dir!"
             $root_dir = $current_dir
         }
 
         if ([IO.Directory]::Exists((Join-Path -Path $current_dir ".hg")))
         {
-            Write-Host "Found a .hg folder at $current_dir!"
+            Write-Debug "Found a .hg folder at $current_dir!"
             $root_dir = $current_dir
         }
 	
@@ -38,31 +38,30 @@ function FindRootFolder {
     } while ($depth_from_tool_path -gt 0 -and $root_dir -eq $null)
 
     if ($root_dir -ne $null)  {
-    	Write-Host "We found a source code directory, so we'll put the docs in the same location"
+    	Write-Debug "We found a source code directory, so we'll put the docs in the same location"
         return $root_dir
     } else { 
-    	Write-Host "No source code folder found, using solution directory"
+    	Write-Debug "No source code folder found, using solution directory"
         return $solution_dir
     }
 }
 
 function Setup-FolderStructure {
-    Write-Host "First time setup of documentation"
+    Write-Debug "First time setup of documentation"
 }
 
 function Upgrade-FolderStructure {
-    Write-Host "Existing documentation folder already found"
+    Write-Debug "Existing documentation folder already found"
 }
 
 # get the "project" root folder
 $project_root = (FindRootFolder);
 
-Write-Host "Installing docs folder inside $project_root"
+Write-Host "Adding docs folder into folder $project_root"
 
 $docs_folder = Join-Path -Path $project_root "docs"
-$metafile = Join-Path -Path $docs_folder ".duchess"
+$configFile = Join-Path -Path $docs_folder "duchess.json"
 $version = $package.Version.Version.ToString()
-
 
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
@@ -79,8 +78,11 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     # $port =  Get-Random -Minimum 30000 -Maximum 50000
     $port = 40000
     
-	# dump the package version to a metafile
-    '{ "version" : "$version", "port" : "$port" }' | Out-File $metafile
+	# dump the version and created port to the config file
+    $properties = @{}
+    $properties.Add('version',$version)
+    $properties.Add('port',$port)
+    ConvertTo-Json $properties | Out-File $configFile
 
     # TODO: overwrite template references to localhost:????? to localhost:40000
 
@@ -90,25 +92,31 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
 } else {  
 
-    # TODO: metafile now is a JSON file, what's an easy way to parse JSON from powershell?
 	$installed_version = $null
-	if ([IO.File]::Exists($metafile) -eq $true) {
-		$installed_version = Get-Content $metafile | Out-String
-    }
+    $port = 40000 
 
-    $port = 40000 # TODO: read this from metadata file
+	if ([IO.File]::Exists($configFile) -eq $true) {
+        $json = Get-Content $metafile | Out-String 
+        $properties = ConvertFrom-Json $json
+		$installed_version = $properties.version
+        $port = $properties.port
+    }
 
 	if ($installed_version -ne $package) {
         
         Upgrade-FolderStructure
 
-		# update the version stored in the docs folder
-        if ([IO.File]::Exists($metafile) -eq $true) {
-            Remove-Item $metafile
+		# update the version stored in configuration
+        if ([IO.File]::Exists($configFile) -eq $true) {
+            Remove-Item $configFile
         }
-		$version | Out-File $metafile	
+
+        $properties = @{}
+        $properties.Add('version',$version)
+        $properties.Add('port',$port)
+        ConvertTo-Json $properties | Out-File $configFile
 	} else {
-        Write-Host "No changes necessary, you've got the latest code"
+        Write-Debug "No changes necessary, you've got the latest code"
     }
 }
 
