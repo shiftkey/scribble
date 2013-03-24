@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>duchess</id>
-    <version>0.1.3.2-pre</version>
+    <id>scribble</id>
+    <version>0.1.3.3-pre</version>
     <authors>Brendan Forster</authors>
     <owners>Brendan Forster</owners>
     <licenseUrl>https://raw.github.com/shiftkey/duchess/master/LICENSE.md</licenseUrl>
@@ -10,8 +10,8 @@
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A highly-opinionated documentation tool for .NET projects</description>
-    <releaseNotes>This package does nothing yet</releaseNotes>
+    <releaseNotes>On installation this package will create the sample package, publish the site locally using pretzel, and open a browser to the published site. how neat is that?</releaseNotes>
     <copyright>Copyright 2013</copyright>
-    <tags>duchess documentation docs</tags>
+    <tags>scribble documentation docs markdown jekyll duchess</tags>
   </metadata>
 </package>
