@@ -21,7 +21,7 @@ Specifically it is designed to:
 
 This is a template which has been added to the `docs` folder by Scribble after installing the package. 
 
-Scribble will let you preview this at any time by pointing your browser at [localhost:4000](http://localhost:4000/).
+Scribble will let you preview this at any time by pointing your browser at [localhost:40000](http://localhost:40000/).
 
 Feel free to edit this file to your heart's content (and check it into source control) so that you too can start writing documentation for this project.
 
@@ -92,9 +92,9 @@ You should use this section here to explain what your project does and how it wo
 
 Here's a bunch of links to resources for this project:
 
- - [Project Site](https://github.com/shiftkey/duchess/)
- - [Documentation](https://shiftkey.github.com/duchess/)
- - [Issue Tracker](https://github.com/shiftkey/duchess/issues/)
+ - [Project Site](https://github.com/shiftkey/scribble/)
+ - [Documentation](https://shiftkey.github.com/scribble/)
+ - [Issue Tracker](https://github.com/shiftkey/scribble/issues/)
  - [JabbR chatroom](https://jabbr.com/rooms/scribble)
 
 ### Installation
