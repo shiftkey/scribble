@@ -6,37 +6,37 @@ To make it easy to document as you develop, why not support a workflow that make
 
 ### Get Started
 
-From the Package Manager Console, just tell Duchess what you're up to.
+From the Package Manager Console, just tell Scribble what you're up to.
 
 If you want to start a new release:
 
 ```
-duchess start major
+scribble start major
 ```
 
 If you're doing something smaller, these are all equivalent:
 
 ```
-duchess start bugfix
-duchess start minor
-duchess start feature
-duchess start task
+scribble start bugfix
+scribble start minor
+scribble start feature
+scribble start task
 ```
 
 If you want to do a pre-release version, any of these things will work:
 
 ```
-duchess start preview
-duchess start pre
+scribble start preview
+scribble start pre
 ```
 
 #### What happens next
 
 So rather than worrying about "ensuring you're doing semver right", why not leave it up to the underlying framework?
 
-Under the hood, duchess will:
+Under the hood, scribble will:
 
- - create a folder called `docs\releases\` (if it doesn't already exist) at the root
+ - create a folder called `docs\release-notes\` (if it doesn't already exist) at the root
  - generate a Markdown template for your release notes (using semanticreleasenotes.org conventions)
  - the file will be named to match the version (e.g. 1.0.md)
  - add in some infrastructure to take this version and update your assemblies to suit
@@ -63,4 +63,4 @@ Once you get to a stable, you can then flag the thing is ready for use:
 
  - `pre`, then `minor`, then `major` - 0.1 -> 0.2 -> 1.0
  - and then a minor release - 1.0 -> 1.1
-
+ 

@@ -1,6 +1,6 @@
 # Design Decisions
 
-Duchess should be available as a solution-level NuGet package.
+Scribble should be available as a solution-level NuGet package.
 
 In particular:
 

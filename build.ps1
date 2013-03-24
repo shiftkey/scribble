@@ -4,7 +4,7 @@ function Get-ScriptDirectory
 	Split-Path $Invocation.MyCommand.Path
 }
 
-$nuspec = Join-Path (Get-ScriptDirectory) src\duchess.nuspec
+$nuspec = Join-Path (Get-ScriptDirectory) src\scribble.nuspec
 $basePath = Join-Path (Get-ScriptDirectory) src\package
 
 $nuget = Join-Path (Get-ScriptDirectory) tools\NuGet.exe

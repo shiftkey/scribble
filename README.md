@@ -3,9 +3,9 @@ Scribble
 
 Scribble is a NuGet package to do the heavy lifting of creating and maintaining documentation in your projects.
 
-Check the [wiki](https://github.com/shiftkey/duchess/wiki) for details about the concepts and ideas.
+Check the [docs folder](https://github.com/shiftkey/scribble/tree/master/docs/) for details about the concepts and ideas.
 
-Specifically it is designed to:
+Specifically it is intended to:
 
  - make documentation easy and fun to write
  - keep code and documentation in sync

@@ -4,11 +4,11 @@
 
 One of the big reasons why Sandcastle has such a bad name is because it is really hard to setup (and automate). XML documentation is another common thing for many codebases but quite often this is more for Intellisense than for end-user documentation.
 
-Duchess should take care of the heavy lifting of setting up the documentation infrastructure, so you can get straight to writing stuff.
+Scribble should take care of the heavy lifting of setting up the documentation infrastructure, so you can get straight to writing stuff.
 
 ## Easy to use
 
-Rather than a custom XML format or inventing a new DSL, Duchess will use Markdown for its content. This allows documentation to be:
+Rather than a custom XML format or inventing a new DSL, Scribble will use Markdown for its content. This allows documentation to be:
 
  - header tags for sections
  - lists of things
@@ -26,7 +26,4 @@ Jekyll is a common static site generator for Ruby, and I've worked on a [project
 
 Quite often you will have code snippets which you want to include in your documentation. It might be in the form of a sample application or some unit tests, but being able to link code and documentation makes life so much easier. 
 
-Duchess should allow you to annotate your source code, which you can then reference in documentation pages.
-
-
-
+Scribble should allow you to annotate your source code, which you can then reference in documentation pages.
