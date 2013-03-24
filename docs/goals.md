@@ -1,3 +1,5 @@
+# Goals
+
 ## Easy to get started
 
 One of the big reasons why Sandcastle has such a bad name is because it is really hard to setup (and automate). XML documentation is another common thing for many codebases but quite often this is more for Intellisense than for end-user documentation.

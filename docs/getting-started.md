@@ -1,4 +1,4 @@
-## Getting Started
+# Getting Started
 
 Once you've installed the NuGet package, you should see two things:
 

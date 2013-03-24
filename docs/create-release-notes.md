@@ -1,4 +1,4 @@
-# Create Release Notes
+# [Proposal] Create Release Notes
 
 ## Workflow
 
