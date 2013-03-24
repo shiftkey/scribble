@@ -63,6 +63,7 @@ $docs_folder = Join-Path -Path $project_root "docs"
 $metafile = Join-Path -Path $docs_folder ".duchess"
 $version = $package.Version.Version.ToString()
 
+
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
@@ -75,8 +76,13 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     New-Item -ItemType directory -Path $docs_folder
 	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse | Out-Null
 
+    # $port =  Get-Random -Minimum 30000 -Maximum 50000
+    $port = 40000
+    
 	# dump the package version to a metafile
-    $version | Out-File $metafile
+    '{ "version" : "$version", "port" : "$port" }' | Out-File $metafile
+
+    # TODO: overwrite template references to localhost:????? to localhost:40000
 
 	# open the file in Visual Studio
     $index = Join-Path -Path $docs_folder "index.md"
@@ -84,10 +90,13 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
 } else {  
 
+    # TODO: metafile now is a JSON file, what's an easy way to parse JSON from powershell?
 	$installed_version = $null
 	if ([IO.File]::Exists($metafile) -eq $true) {
 		$installed_version = Get-Content $metafile | Out-String
     }
+
+    $port = 40000 # TODO: read this from metadata file
 
 	if ($installed_version -ne $package) {
         
@@ -107,4 +116,4 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
 # launch ze missiles
 $launch_script = Join-Path -Path $toolsPath "_pretzel\Launch-Docs.ps1"
-powershell -File $launch_script -DocsRoot $docs_folder
+powershell -File $launch_script -DocsRoot $docs_folder -PortNumber $port

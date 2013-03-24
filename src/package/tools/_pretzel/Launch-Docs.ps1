@@ -1,14 +1,13 @@
 Param(
-  [string]$DocsRoot
+  [string]$DocsRoot,
+  [string]$PortNumber
 )
 
 Set-StrictMode -Version Latest
 
 $ErrorActionPreference = "Stop"
 
-$PretzelPort = 40000
-
-$ExistingListener = (& netstat -anop tcp) | where { $_ -match "0.0.0.0:$PretzelPort\s+0.0.0.0:0\s+LISTENING" }
+$ExistingListener = (& netstat -anop tcp) | where { $_ -match "0.0.0.0:$PortNumber\s+0.0.0.0:0\s+LISTENING" }
 if ($ExistingListener -ne $null)
 {
 	[void]($ExistingListener -match "\d+$")
@@ -41,4 +40,4 @@ if ($result -like "Fail*") {
 	throw "Pretzel bake failed"
 }
 
-[void](Start-Process $PretzelExe "taste -debug --directory $DocsRoot --port $PretzelPort")
+[void](Start-Process $PretzelExe "taste -debug --directory $DocsRoot --port $PortNumber")
