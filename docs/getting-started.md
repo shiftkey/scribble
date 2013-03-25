@@ -2,12 +2,10 @@
 
 Once you've installed the NuGet package, you should see two things:
 
-### the index.md file open in Visual Studio
+### Open index.md in Visual Studio
 
 
-### the documentation site open in your browser
 
 
-The "documentation site" should be a collection of Markdown content files and Jekyll site structure.
+### View the documentation site in your browser
 
-**TODO:** discuss Jekyll concepts and why this is a good thing

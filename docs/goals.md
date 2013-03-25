@@ -1,4 +1,6 @@
-# Goals
+# Goals of Scribble
+
+As I was sketching out the initial idea, I came up with four initial goals.
 
 ## Easy to get started
 
