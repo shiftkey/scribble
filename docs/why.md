@@ -1,6 +1,6 @@
 # Why create Scribble?
 
-This idea started out of a few discussions I had with people at MVP Summit in February, and I wrote an [initial spec](https://gist.github.com/shiftkey/5007179) about this in a rush on the last day.
+This idea started out of a few discussions I had with people at MVP Summit in February, and I wrote an [initial brief](https://gist.github.com/shiftkey/5007179) about this in a rush on the last day.
 
 Now that I've had some time to settle and start protyping concepts, I wanted to flesh out more about what problems I am looking to solve.
 
@@ -10,10 +10,10 @@ I spent a bunch of time sitting in on open source discussions, and a common thre
 
 Things like:
 
- - so many projects don't do docs
- - docs can be really hard to find
- - docs doesn't often go beyond the basics
- - docs that is out of sync is painful to work with
+ - "why do many projects don't have docs at all?"
+ - "docs are really hard to find!"
+ - "docs doesn't cover more than the basics!"
+ - "out-of-sync docs are painful to work with!"
 
 And it's not like there's a lack of options out there - you can check out tools like [Sandcastle](http://shfb.codeplex.com/), [GhostDoc](http://submain.com/products/ghostdoc.aspx), [Doxygen](http://www.stack.nl/~dimitri/doxygen/) and [Live Documenter](http://theboxsoftware.com/products/live-documenter/) to get a feel for what's out there.
 
@@ -29,11 +29,16 @@ Why aren't we capturing things other sorts of information?
  - tutorials
  - API walkthroughs
 
-## Others are doing different things
+## Others are doing things differently
 
-
-
+TODO: find some good examples of other projects doing cool things with documentation
 
 ## We can do better 
 
+I was involved with a team recently where we tackled this problem. We had an existing unloved CMS containing documentation and a team of developers working on a big system. Over time the value of existing documentation was declining due to its isolation from the development process.
 
+We wanted something that was easy to write and keep alongside code. Something that we could version control. Something we could deploy out to an environment from a build server. 
+
+Due to the size of the project, we had to drop this approach at a certain point - but it was an excellent fit for a team of developers working on a codebase.
+
+Scribble is an evolution of what I learned from that project.
