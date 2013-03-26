@@ -70,8 +70,6 @@ Test it out for yourself. Make a small change to the file, save it, and reload t
 
 When you installed Scribble, we also included a simple site template and folder structure that is based on the `Jekyll` project.
 
-**TODO: borrow and adapt a good template**
-
 **TODO: can i hook pre- and post-processing to pretzel?**
 
 If you're familiar with how Jekyll works, you can dive right in and start writing custom templates and layouts. We use a tool called `pretzel` to render the Jekyll site, and it supports a lot of the features that Jekyll does. 

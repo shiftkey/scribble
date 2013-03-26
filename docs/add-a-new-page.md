@@ -1,4 +1,4 @@
-# Add a new page
+# [Proposal] Add a new page
 
 Once you've created your docs folder, the next step is to insert a new page into your documentation.
 

@@ -39,7 +39,7 @@ Under the hood, scribble will:
  - create a folder called `docs\release-notes\` (if it doesn't already exist) at the root
  - generate a Markdown template for your release notes (using semanticreleasenotes.org conventions)
  - the file will be named to match the version (e.g. 1.0.md)
- - add in some infrastructure to take this version and update your assemblies to suit
+ - add in some infrastructure to take this version and update your assemblies in build
 
 TODO:
 
