@@ -19,9 +19,15 @@ Specifically it is intended to:
 
 As part of the installation, Scribble will create the folder structure under `docs` in your solution folder (or repository root if it detects a git/hg repository) and open the site in your default browser.
 
-![screenshot of docs folder]()
+![](https://raw.github.com/shiftkey/scribble/gh-pages/images/folder-structure.png)
 
-![screenshot of browser]()
+Scribble will also open the Markdown template for the index so you can start editing quickly
+
+![screenshot of docs folder](https://raw.github.com/shiftkey/scribble/gh-pages/images/edit-file.png)
+
+In the background Scribble will open a tiny webserver to transform the Markdown files and other files into a website which you can view immediately in the browser
+
+![screenshot of browser](https://raw.github.com/shiftkey/scribble/gh-pages/images/view-site.png)
 
 When you open the solution after subsequent usages, the previewer will startup again so you can keep your documentation close.
 
