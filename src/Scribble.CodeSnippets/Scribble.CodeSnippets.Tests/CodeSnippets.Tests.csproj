@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{57DB7A48-6056-411C-8468-E4FC02B3ABB0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Scribble.CodeSnippet.Tests</RootNamespace>
+    <AssemblyName>Scribble.CodeSnippet.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\packages\xunit.extensions.1.9.1\lib\net20\xunit.extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\apply-snippets\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\apply-snippets\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\get-code-snippets\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\apply-snippets\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="MiscellaneousTests.cs" />
+    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\code.cs" />
+    <EmbeddedResource Include="scenarios\8-SamplePage\code.cs" />
+    <None Include="data\test-site\docs\index.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\test-site\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\test-site\source\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="ImportTestSuite.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\input.md" />
+    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\output.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\output.md" />
+    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\input.md" />
+    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\output.md" />
+    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\input.md" />
+    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\input.md" />
+    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\output.md" />
+    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\input.md" />
+    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\output.md" />
+    <EmbeddedResource Include="scenarios\6-KeyNotFound\input.md" />
+    <EmbeddedResource Include="scenarios\6-KeyNotFound\output.md" />
+    <EmbeddedResource Include="scenarios\7-UseAUnitTest\input.md" />
+    <EmbeddedResource Include="scenarios\7-UseAUnitTest\output.md" />
+    <EmbeddedResource Include="scenarios\8-SamplePage\input.md" />
+    <EmbeddedResource Include="scenarios\8-SamplePage\output.md" />
+    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md" />
+    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\6-KeyNotFound\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\7-UseAUnitTest\code.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scribble.CodeSnippets\CodeSnippets.csproj">
+      <Project>{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}</Project>
+      <Name>CodeSnippets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
