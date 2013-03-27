@@ -1,6 +1,7 @@
 param($installPath, $toolsPath, $package, $project)
 
 Import-Module (Join-Path $toolsPath Resolve-RootFolder.psm1)
+Import-Module (Join-Path $toolsPath "_pretzel\Start-Pretzel.psm1")
 
 function Setup-FolderStructure {
     Write-Debug "First time setup of documentation"
@@ -76,6 +77,4 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
 # TODO: hook in any other commands
 
-# launch ze missiles
-$launch_script = Join-Path -Path $toolsPath "_pretzel\Launch-Docs.ps1"
-powershell -File $launch_script -DocsRoot $docs_folder -PortNumber $port
+Start-Pretzel $docs_folder $port
