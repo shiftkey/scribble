@@ -61,7 +61,7 @@ Write-Host "Adding docs folder into folder $project_root"
 
 $docs_folder = Join-Path -Path $project_root "docs"
 $configFile = Join-Path -Path $docs_folder "scribble.json"
-$version = $package.Version.Version.ToString()
+$version = $package.ToString()
 
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
@@ -95,7 +95,7 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     $port = 40000 
 
 	if ([IO.File]::Exists($configFile) -eq $true) {
-        $json = Get-Content $metafile | Out-String 
+        $json = Get-Content $configFile | Out-String 
         $properties = ConvertFrom-Json $json
 		$installed_version = $properties.version
         $port = $properties.port
