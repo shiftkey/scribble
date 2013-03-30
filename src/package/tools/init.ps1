@@ -1,6 +1,7 @@
 param($installPath, $toolsPath, $package, $project)
 
 Import-Module (Join-Path $toolsPath Resolve-RootFolder.psm1)
+Import-Module (Join-Path $toolsPath Preview-Docs.psm1)
 Import-Module (Join-Path $toolsPath "_pretzel\Start-Pretzel.psm1")
 
 function Setup-FolderStructure {
