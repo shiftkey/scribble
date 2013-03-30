@@ -1,4 +1,4 @@
-function Start-Pretzel($docsRoot, $portNumber) {
+function Start-Pretzel($rootDir, $docsRoot, $portNumber) {
 
 	$ExistingListener = (& netstat -anop tcp) | where { $_ -match "0.0.0.0:$portNumber\s+0.0.0.0:0\s+LISTENING" }
 	if ($ExistingListener -ne $null)
@@ -19,8 +19,9 @@ function Start-Pretzel($docsRoot, $portNumber) {
 	}
 
 	[void](New-Item $SiteCache -ItemType Directory)
-	$SiteCacheDirectoryInfo = New-Object System.IO.DirectoryInfo $SiteCache
-	$SiteCacheDirectoryInfo.Attributes = [System.IO.FileAttributes] "Directory, Hidden"
+	# TODO: why is this screaming at me at runtime?
+	#$SiteCacheDirectoryInfo = New-Object System.IO.DirectoryInfo $SiteCache
+	#$SiteCacheDirectoryInfo.Attributes = [System.IO.FileAttributes] "Directory, Hidden"
 
 	"Launching Pretzel"
 	Remove-Item $Env:TEMP\*.* -Include Pretzel.*
@@ -33,6 +34,5 @@ function Start-Pretzel($docsRoot, $portNumber) {
 		throw "Pretzel bake failed"
 	}
 
-	[void](Start-Process $PretzelExe "taste -debug --directory $docsRoot --port $portNumber")
-
+	[void](Start-Process $PretzelExe "taste -debug --directory .\docs --port $portNumber" -WorkingDirectory $rootDir)
 }

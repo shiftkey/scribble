@@ -77,4 +77,4 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
 # TODO: hook in any other commands
 
-Start-Pretzel $docs_folder $port
+Start-Pretzel $project_root ".\docs" $port
