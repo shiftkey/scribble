@@ -214,6 +214,12 @@ namespace Scribble.CodeSnippets
 
             var snippets = GetCodeSnippets(codeFiles);
 
+            if (snippets.Any(s => string.IsNullOrWhiteSpace(s.Value)))
+            {
+                // TODO: report when snippets found are malformed
+                throw new InvalidOperationException("oops");
+            }
+
             var inputFiles = new[] { "*.md","*.mdown","*.markdown" }.SelectMany(
               extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories));
 
