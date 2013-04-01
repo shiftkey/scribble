@@ -14,8 +14,6 @@ function Upgrade-FolderStructure {
 
 $project_root = Resolve-RootFolder($toolsPath);
 
-Write-Host "Adding docs folder into folder $project_root"
-
 $docs_folder = Join-Path -Path $project_root "docs"
 $configFile = Join-Path -Path $docs_folder "scribble.json"
 $version = $package.ToString()
@@ -23,6 +21,7 @@ $version = $package.ToString()
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
+    Write-Host "Adding docs folder into folder $project_root"
     Setup-FolderStructure
     
     # create folder
@@ -51,6 +50,8 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     $dte.ItemOperations.Navigate("http://localhost:$port/")
 
 } else {  
+
+    Write-Host "Checking version of Scribble found locally"
 
 	$installed_version = $null
     $port = 40000 
