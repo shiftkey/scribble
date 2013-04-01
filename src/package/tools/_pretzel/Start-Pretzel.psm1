@@ -34,5 +34,5 @@ function Start-Pretzel($rootDir, $docsRoot, $portNumber) {
 		throw "Pretzel bake failed"
 	}
 
-	[void](Start-Process $PretzelExe "taste -debug --directory .\docs --port $portNumber" -WorkingDirectory $rootDir)
+	[void](Start-Process $PretzelExe "taste -debug --directory .\docs --port $portNumber --nobrowser" -WorkingDirectory $rootDir)
 }

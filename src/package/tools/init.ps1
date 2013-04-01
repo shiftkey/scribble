@@ -46,6 +46,10 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     $index = Join-Path -Path $docs_folder "index.md"
 	$dte.ItemOperations.OpenFile($index)
 
+    Start-Pretzel $project_root ".\docs" $port
+
+    $dte.ItemOperations.Navigate("http://localhost:$port/")
+
 } else {  
 
 	$installed_version = $null
@@ -76,4 +80,4 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     }
 }
 
-Start-Pretzel $project_root ".\docs" $port
+
