@@ -1,8 +1,6 @@
 param($installPath, $toolsPath, $package, $project)
 
 Import-Module (Join-Path $toolsPath Resolve-RootFolder.psm1)
-Import-Module (Join-Path $toolsPath Start-Preview.psm1)
-Import-Module (Join-Path $toolsPath "_pretzel\Start-Pretzel.psm1")
 
 function Setup-FolderStructure {
     Write-Debug "First time setup of documentation"
@@ -18,6 +16,8 @@ $docs_folder = Join-Path -Path $project_root "docs"
 $configFile = Join-Path -Path $docs_folder "scribble.json"
 $version = $package.ToString()
 
+$startBrowser = $false
+
 # if this is the first time we run the package
 if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 
@@ -31,7 +31,7 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     New-Item -ItemType directory -Path $docs_folder
 	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse | Out-Null
 
-    $port =  Get-Random -Minimum 30000 -Maximum 50000
+    $port = Get-Random -Minimum 30000 -Maximum 50000
     
 	# dump the version and created port to the config file
     $properties = @{}
@@ -45,7 +45,7 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     $index = Join-Path -Path $docs_folder "index.md"
 	$dte.ItemOperations.OpenFile($index)
 
-    Start-Pretzel $project_root ".\docs" $port
+    $startBrowser = $true
 
     $dte.ItemOperations.Navigate("http://localhost:$port/")
 
@@ -81,4 +81,8 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     }
 }
 
+Import-Module (Join-Path $toolsPath Start-Preview.psm1) -ArgumentList @($project_root, $docs_folder, $port)
 
+if ($startBrowser) {
+    Start-Preview
+}
