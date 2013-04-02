@@ -151,3 +151,5 @@ $RECYCLE.BIN/
 *.nupkg
 
 packages
+
+CommonAssemblyInfo.cs

@@ -1,0 +1,62 @@
+<Project ToolsVersion="4.0" DefaultTargets="Test;Chocolatey" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- TODO: mono build -->
+  <!-- TODO: package step to merge code into one binary -->
+  <Import Project="$(MSBuildProjectDirectory)\tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+    <Version>$(BUILD_NUMBER)</Version>
+    <GitCommitHash>$(BUILD_VCS_NUMBER)</GitCommitHash>
+    <GitCommitHash Condition=" '$(GitCommitHash)' != '' ">$(GitCommitHash.Substring(0, 8))</GitCommitHash>
+    <!-- dev config -->
+    <Version Condition=" '$(Version)' == '' ">0.0.0.1</Version>
+    <ArtifactsDir>$(MSBuildProjectDirectory)\artifacts\</ArtifactsDir>
+    <SourceDir>$(MSBuildProjectDirectory)\src\</SourceDir>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile=".\tools\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+
+  <Target Name="Version">
+
+    <GitVersion LocalPath="$(SourceDir)\..\" Condition=" '$(GitCommitHash)' == '' ">
+      <Output TaskParameter="CommitHash" PropertyName="GitCommitHash" />
+    </GitVersion>
+
+    <AssemblyInfo CodeLanguage="CS" 
+                  OutputFile="$(SourceDir)\CommonAssemblyInfo.cs"
+                  AssemblyCopyright="Copyright © Code52 2013" 
+                  ComVisible="false" 
+                  AssemblyVersion="$(Version)" 
+                  AssemblyFileVersion="$(Version)" 
+                  AssemblyInformationalVersion="Built from hash '$(GitCommitHash)'" />
+
+    <Message Text="Building version $(Version) from hash $(GitCommitHash)"  Importance="High" />
+
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Version">
+    <Message Text="=========== Compile ===========" Importance="High" />
+    
+    <MSBuild Projects="$(SourceDir)Scribble.CodeSnippets\Scribble.CodeSnippets.sln" Properties="Configuration=$(Configuration)" Targets="Rebuild" />
+
+    <MakeDir Directories="$(ArtifactsDir)" />
+
+    <Message Text="=========== Compile Done ===========" Importance="High" />
+    
+  </Target>
+
+  <Target Name="Test" DependsOnTargets="Compile">
+
+    <Message Text="=========== Run Tests ===========" Importance="High" />
+
+    <ItemGroup>
+      <TestFiles Include="$(MSBuildProjectDirectory)\**\bin\$(Configuration)\*Tests.dll" />
+    </ItemGroup>
+
+    <xunit Assemblies="@(TestFiles)" />
+
+    <Message Text="=========== Tests Passed ===========" Importance="High" />
+  </Target>
+
+</Project>

@@ -1,12 +1,4 @@
-function Get-ScriptDirectory
-{
-	$Invocation = (Get-Variable MyInvocation -Scope 1).Value
-	Split-Path $Invocation.MyCommand.Path
-}
+$version = "v4.0.30319"
 
-$nuspec = Join-Path (Get-ScriptDirectory) src\scribble.nuspec
-$basePath = Join-Path (Get-ScriptDirectory) src\package
-
-$nuget = Join-Path (Get-ScriptDirectory) tools\NuGet.exe
-
-. $nuget pack $nuspec -BasePath $basePath -OutputDir D:\Code\packages\ -NoPackageAnalysis
+# build the solution from scratch
+. $env:windir\Microsoft.NET\Framework\$version\MSBuild.exe build.proj /t:Test /ToolsVersion:4.0 /p:configuration=Release /m /p:BUILD_NUMBER=$build_number /m /v:M /nr:false
