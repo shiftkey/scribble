@@ -8,7 +8,7 @@ namespace Scribble.CodeSnippet.Tests
 {
     public class MiscellaneousTests
     {
-        [Fact(Skip = "great more build server hilarity")]
+        [Fact]
         public void GetCodeSnippets_ReturnsMultipleResults_AllHaveValues()
         {
             var directory = GetCurrentDirectory(@"data\get-code-snippets\");
@@ -20,7 +20,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
         }
 
-        [Fact(Skip = "great more build server hilarity")]
+        [Fact]
         public void ApplySnippets_UsingFile_MatchesExpectedResult()
         {
             var directory = GetCurrentDirectory(@"data\apply-snippets\");
@@ -35,7 +35,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Equal(expected, actual);
         }
 
-        [Fact(Skip = "great more build server hilarity")]
+        [Fact]
         public void Update_UsingSourceAndDocsFolder_WillFormatWithCodeSnippet()
         {
             var directory = GetCurrentDirectory(@"data\test-site\");
@@ -59,5 +59,6 @@ namespace Scribble.CodeSnippet.Tests
             var directory = Path.GetDirectoryName(fullPath);
             return Path.Combine(directory, relativePath);
         }
+
     }
 }
