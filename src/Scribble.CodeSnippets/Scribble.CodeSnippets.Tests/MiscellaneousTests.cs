@@ -21,6 +21,18 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
+        public void GetCodeSnippets_WithNestedSnippets_ReturnsTwoValues()
+        {
+            var directory = GetCurrentDirectory(@"data\get-code-snippets\");
+            var codeFile = Path.Combine(directory, @"nested-code.cs");
+
+            var actual = Importer.GetCodeSnippets(new[] { codeFile });
+
+            Assert.Equal(2, actual.Count);
+            Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
+        }
+
+        [Fact]
         public void ApplySnippets_UsingFile_MatchesExpectedResult()
         {
             var directory = GetCurrentDirectory(@"data\apply-snippets\");

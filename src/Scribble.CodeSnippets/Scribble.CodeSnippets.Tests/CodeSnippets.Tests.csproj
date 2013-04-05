@@ -59,6 +59,9 @@
     <None Include="data\apply-snippets\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="data\get-code-snippets\nested-code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="MiscellaneousTests.cs" />
     <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\code.cs" />
     <EmbeddedResource Include="scenarios\8-SamplePage\code.cs" />
