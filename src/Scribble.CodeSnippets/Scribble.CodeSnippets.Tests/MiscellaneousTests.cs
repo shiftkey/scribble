@@ -48,10 +48,22 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
-        public void Update_UsingSourceAndDocsFolder_WillFormatWithCodeSnippet()
+        public void Update_UsingSourceAndDocsFolder_WillReturnCodeSnippetCount()
         {
             var directory = GetCurrentDirectory(@"data\test-site\");
             
+            var codeFolder = Path.Combine(directory, @"source\");
+            var docsFolder = Path.Combine(directory, @"docs\");
+            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+
+            Assert.Equal(14, result.Snippets);
+        }
+
+        [Fact]
+        public void Update_UsingSourceAndDocsFolder_WillFormatWithCodeSnippet()
+        {
+            var directory = GetCurrentDirectory(@"data\test-site\");
+
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
             Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);

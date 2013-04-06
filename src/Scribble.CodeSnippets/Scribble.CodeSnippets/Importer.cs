@@ -207,8 +207,9 @@ namespace Scribble.CodeSnippets
             return baselineText;
         }
 
-        public static bool Update(string codeFolder, string[] extensionsToSearch, string docsFolder)
+        public static UpdateResult Update(string codeFolder, string[] extensionsToSearch, string docsFolder)
         {
+            var result = new UpdateResult();
             var codeFiles = extensionsToSearch.SelectMany(
                 extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories));
 
@@ -220,6 +221,8 @@ namespace Scribble.CodeSnippets
                 throw new InvalidOperationException("oops");
             }
 
+            result.Snippets = snippets.Count;
+
             var inputFiles = new[] { "*.md","*.mdown","*.markdown" }.SelectMany(
               extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories));
 
@@ -229,7 +232,12 @@ namespace Scribble.CodeSnippets
                 File.WriteAllText(inputFile, newText);
             }
 
-            return false;
+            return result;
         }
+    }
+
+    public class UpdateResult
+    {
+        public int Snippets { get; set; }
     }
 }
