@@ -60,6 +60,18 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
+        public void Update_UsingSourceAndDocsFolder_ReturnsTrue()
+        {
+            var directory = GetCurrentDirectory(@"data\test-site\");
+
+            var codeFolder = Path.Combine(directory, @"source\");
+            var docsFolder = Path.Combine(directory, @"docs\");
+            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+
+            Assert.True(result.Completed);
+        }
+
+        [Fact]
         public void Update_UsingSourceAndDocsFolder_WillFormatWithCodeSnippet()
         {
             var directory = GetCurrentDirectory(@"data\test-site\");

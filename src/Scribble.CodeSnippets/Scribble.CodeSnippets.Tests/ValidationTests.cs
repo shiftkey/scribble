@@ -48,7 +48,8 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            Assert.Contains("Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet'). Ignoring...", result.Messages);
+            Assert.False(result.Completed);
+            Assert.Contains("Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').", result.Messages);
             // TODO: include file path? line?
             // TODO: debug mode?
         }

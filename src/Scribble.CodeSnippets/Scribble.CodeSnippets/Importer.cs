@@ -220,7 +220,7 @@ namespace Scribble.CodeSnippets
             {
                 result.Messages.AddRange(
                     incompleteSnippets.Select(i =>
-                        string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}'). Ignoring...", i.Key)));
+                        string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}').", i.Key)));
 
                 return result;
             }
@@ -236,6 +236,8 @@ namespace Scribble.CodeSnippets
                 File.WriteAllText(inputFile, newText);
             }
 
+            result.Completed = true;
+
             return result;
         }
     }
@@ -250,5 +252,7 @@ namespace Scribble.CodeSnippets
         public int Snippets { get; set; }
 
         public List<string> Messages { get; set; }
+
+        public bool Completed { get; set; }
     }
 }
