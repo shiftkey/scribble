@@ -47,6 +47,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\validation\bad-snippet\docs\index.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\validation\no-reference\source\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\validation\bad-snippet\source\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="ValidationTests.cs" />
     <None Include="data\apply-snippets\input.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -60,6 +70,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="data\get-code-snippets\nested-code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\validation\no-reference\docs\index.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\validation\no-snippets\source\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="MiscellaneousTests.cs" />
@@ -96,6 +112,9 @@
     <EmbeddedResource Include="scenarios\8-SamplePage\output.md" />
     <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md" />
     <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md" />
+    <None Include="data\validation\no-snippets\docs\index.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

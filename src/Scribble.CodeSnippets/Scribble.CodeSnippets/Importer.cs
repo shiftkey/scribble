@@ -215,10 +215,14 @@ namespace Scribble.CodeSnippets
 
             var snippets = GetCodeSnippets(codeFiles);
 
-            if (snippets.Any(s => string.IsNullOrWhiteSpace(s.Value)))
+            var incompleteSnippets = snippets.Where(s => string.IsNullOrWhiteSpace(s.Value)).ToArray();
+            if (incompleteSnippets.Any())
             {
-                // TODO: report when snippets found are malformed
-                throw new InvalidOperationException("oops");
+                result.Messages.AddRange(
+                    incompleteSnippets.Select(i =>
+                        string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}'). Ignoring...", i.Key)));
+
+                return result;
             }
 
             result.Snippets = snippets.Count;
@@ -238,6 +242,13 @@ namespace Scribble.CodeSnippets
 
     public class UpdateResult
     {
+        public UpdateResult()
+        {
+            Messages = new List<string>();
+        }
+
         public int Snippets { get; set; }
+
+        public List<string> Messages { get; set; }
     }
 }
