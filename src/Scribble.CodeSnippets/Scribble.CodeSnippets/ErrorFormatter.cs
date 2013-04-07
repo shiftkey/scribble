@@ -47,6 +47,7 @@ namespace Scribble.CodeSnippets
             return new ScribbleMessage
             {
                 File = snippet.File,
+                LineNumber = snippet.LineNumber,
                 Message = string.Format("Could not find a code snippet for reference '{0}'", snippet.Key)
             };
         }

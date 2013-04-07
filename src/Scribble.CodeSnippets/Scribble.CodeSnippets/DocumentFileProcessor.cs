@@ -54,17 +54,15 @@ namespace Scribble.CodeSnippets
 
             var baselineText = File.ReadAllText(inputFile);
 
-            var matches = Regex.Matches(baselineText, @"<!--[\s]*import[\s]*(?<key>[\w-]*)[\s]*-->");
-
-            // ensure the required keys match what we have been provided
-            var expectedKeys = matches.Cast<Match>().Select(m => m.Groups["key"].Value);
-            var foundKeys = snippets.Select(m => m.Key);
-
-            var missingKeys = expectedKeys.Except(foundKeys).ToArray();
+            var missingKeys = CheckMissingKeys(snippets, baselineText);
             if (missingKeys.Any())
             {
-                result.RequiredSnippets = missingKeys.Select(
-                    key => new CodeSnippetReference() { File = inputFile, Key = key});
+                foreach (var missingKey in missingKeys)
+                {
+                    missingKey.File = inputFile;
+                }
+
+                result.RequiredSnippets = missingKeys;
                 result.Text = baselineText;
                 return result;
             }
@@ -88,6 +86,24 @@ namespace Scribble.CodeSnippets
             result.Text = baselineText;
 
             return result;
+        }
+
+        static CodeSnippetReference[] CheckMissingKeys(IEnumerable<CodeSnippet> snippets, string baselineText)
+        {
+            var foundKeys = snippets.Select(m => m.Key);
+
+            var matches = Regex.Matches(baselineText, @"<!--[\s]*import[\s]*(?<key>[\w-]*)[\s]*-->");
+
+            var expectedKeysGroups = matches.Cast<Match>().Select(m => m.Groups["key"]);
+            var expectedKeys = expectedKeysGroups.Select(k => {
+                    var index = k.Index;
+                    var lineCount = baselineText.Substring(0, index)
+                                                .Count(c => c == '\n') + 1;
+
+                    return new CodeSnippetReference { LineNumber = lineCount, Key = k.Value };
+            });
+            
+            return expectedKeys.Where(k => !foundKeys.Contains(k.Key)).ToArray();
         }
 
         static string ProcessMatch(string key, string value, string baseLineText)

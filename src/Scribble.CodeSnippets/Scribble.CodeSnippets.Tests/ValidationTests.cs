@@ -38,6 +38,9 @@ namespace Scribble.CodeSnippet.Tests
             // file is as we expected
             Assert.True(error.File.StartsWith(docsFolder));
             Assert.True(error.File.EndsWith("index.md"));
+
+            // and we have the right line number to look at
+            Assert.Equal(15, error.LineNumber);
         }
 
         [Fact]
@@ -66,7 +69,7 @@ namespace Scribble.CodeSnippet.Tests
             var warning = result.Warnings.First();
             // message explains error
             Assert.Equal(warning.Message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
-            
+
             // file is as we expected
             Assert.True(warning.File.StartsWith(codeFolder));
             Assert.True(warning.File.EndsWith("code.cs"));
@@ -89,13 +92,13 @@ namespace Scribble.CodeSnippet.Tests
 
             // message explains error
             Assert.Equal(error.Message, "Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').");
-            
+
             // file is as we expected
             Assert.True(error.File.StartsWith(codeFolder));
             Assert.True(error.File.EndsWith("code.cs"));
 
             // and we have the right line number to look at
-            Assert.Equal(error.LineNumber, 30);
+            Assert.Equal(30, error.LineNumber);
         }
 
         [Fact]
