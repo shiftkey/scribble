@@ -1,4 +1,5 @@
 using System.Linq;
+using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
 {
@@ -39,9 +40,6 @@ namespace Scribble.CodeSnippets
                 var messages = ErrorFormatter.FormatUnused(snippetsNotUsed);
                 result.Warnings.AddRange(messages);
             }
-
-            result.Warnings.AddRange(ErrorFormatter.Format(processResult.Warnings));
-            result.Errors.AddRange(ErrorFormatter.Format(processResult.Errors));
 
             result.Files = processResult.Count;
             result.Completed = !result.Errors.Any();

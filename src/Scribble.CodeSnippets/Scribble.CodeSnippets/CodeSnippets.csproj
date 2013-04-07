@@ -41,16 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeFileParser.cs" />
-    <Compile Include="CodeSnippet.cs" />
-    <Compile Include="CodeSnippetReference.cs" />
     <Compile Include="DocumentFileProcessor.cs" />
-    <Compile Include="DocumentProcessResult.cs" />
     <Compile Include="ErrorFormatter.cs" />
     <Compile Include="Importer.cs" />
+    <Compile Include="Models\CodeSnippet.cs" />
+    <Compile Include="Models\CodeSnippetReference.cs" />
+    <Compile Include="Models\DocumentProcessResult.cs" />
+    <Compile Include="Models\ScribbleMessage.cs" />
+    <Compile Include="Models\UpdateResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScribbleMessage.cs" />
-    <Compile Include="UpdateResult.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

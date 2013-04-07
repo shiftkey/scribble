@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Scribble.CodeSnippets
+namespace Scribble.CodeSnippets.Models
 {
     public class DocumentProcessResult
     {

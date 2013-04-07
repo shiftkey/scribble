@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
 {
@@ -21,16 +22,6 @@ namespace Scribble.CodeSnippets
             };
         }
 
-        public static IEnumerable<ScribbleMessage> Format(DocumentProcessResult incompleteSnippets)
-        {
-            return Enumerable.Empty<ScribbleMessage>();
-        }
-
-        public static IEnumerable<ScribbleMessage> Format(IEnumerable<object> messages)
-        {
-            return Enumerable.Empty<ScribbleMessage>();
-        }
-
         public static IEnumerable<ScribbleMessage> FormatUnused(IEnumerable<CodeSnippet> codeSnippets)
         {
             return codeSnippets.Select(ToUnusedMessage);
@@ -50,7 +41,6 @@ namespace Scribble.CodeSnippets
         {
             return codeSnippets.Select(ToRequiredMessage);
         }
-
 
         static ScribbleMessage ToRequiredMessage(CodeSnippetReference snippet)
         {

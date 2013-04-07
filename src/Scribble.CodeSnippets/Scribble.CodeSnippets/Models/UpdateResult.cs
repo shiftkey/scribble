@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 
-namespace Scribble.CodeSnippets
+namespace Scribble.CodeSnippets.Models
 {
     public class UpdateResult
     {

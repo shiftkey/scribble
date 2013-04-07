@@ -1,4 +1,4 @@
-namespace Scribble.CodeSnippets
+namespace Scribble.CodeSnippets.Models
 {
     public class ScribbleMessage
     {
