@@ -47,6 +47,7 @@
     <Compile Include="Models\CodeSnippet.cs" />
     <Compile Include="Models\CodeSnippetReference.cs" />
     <Compile Include="Models\DocumentProcessResult.cs" />
+    <Compile Include="Models\FileProcessResult.cs" />
     <Compile Include="Models\ScribbleMessage.cs" />
     <Compile Include="Models\UpdateResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

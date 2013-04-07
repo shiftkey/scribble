@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using Scribble.CodeSnippets.Models;
 
@@ -7,6 +8,8 @@ namespace Scribble.CodeSnippets
     {
         public static UpdateResult Update(string codeFolder, string[] extensionsToSearch, string docsFolder)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             var result = new UpdateResult();
 
             var codeParser = new CodeFileParser(codeFolder);
@@ -43,6 +46,9 @@ namespace Scribble.CodeSnippets
 
             result.Files = processResult.Count;
             result.Completed = !result.Errors.Any();
+
+            stopwatch.Stop();
+            result.ElapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
             return result;
         }

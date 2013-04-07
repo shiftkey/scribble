@@ -26,7 +26,7 @@ namespace Scribble.CodeSnippet.Tests
         {
             get
             {
-                var directory = GetCurrentDirectory(@"scenarios\");
+                var directory = @"scenarios\".ToCurrentDirectory();
                 var folders = Directory.GetDirectories(directory);
                 
                 return (from folder in folders

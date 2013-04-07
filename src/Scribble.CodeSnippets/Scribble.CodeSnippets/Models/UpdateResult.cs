@@ -19,20 +19,7 @@ namespace Scribble.CodeSnippets.Models
         public List<ScribbleMessage> Warnings { get; set; }
 
         public List<ScribbleMessage> Errors { get; set; }
-    }
 
-    public class FileProcessResult
-    {
-        public FileProcessResult()
-        {
-            Snippets = new List<CodeSnippet>();
-            RequiredSnippets = new List<CodeSnippetReference>();
-        }
-
-        public string Text { get; set; }
-
-        public List<CodeSnippet> Snippets { get; set; }
-
-        public IEnumerable<CodeSnippetReference> RequiredSnippets { get; set; }
+        public long ElapsedMilliseconds { get; set; }
     }
 }
