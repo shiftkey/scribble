@@ -32,6 +32,7 @@ namespace Scribble.CodeSnippets
             return baselineText;
         }
 
+        [Obsolete("Moved to CodeFileParser")]
         public static IList<CodeSnippet> GetCodeSnippets(IEnumerable<string> codeFiles)
         {
             var codeSnippets = new List<CodeSnippet>();
@@ -48,6 +49,7 @@ namespace Scribble.CodeSnippets
             return codeSnippets;
         }
 
+        [Obsolete("Moved to CodeFileParser")]
         static IEnumerable<CodeSnippet> GetCodeSnippetsFromFile(IList<string> lines)
         {
             var innerList = new List<CodeSnippet>();
@@ -98,6 +100,7 @@ namespace Scribble.CodeSnippets
             return true;
         }
 
+        [Obsolete("Moving this into MarkdownFileParser")]
         static string ProcessMatch(string key, string value, string baseLineText)
         {
             var lookup = string.Format("<!-- import {0} -->", key);
@@ -195,7 +198,8 @@ namespace Scribble.CodeSnippets
             return s.Length;
         }
 
-        public static string ApplySnippets(IList<CodeSnippet> snippets, string inputFile)
+        [Obsolete("Moving this into MarkdownFileParser")]
+        public static string ApplySnippets(ICollection<CodeSnippet> snippets, string inputFile)
         {
             var baselineText = File.ReadAllText(inputFile);
 
@@ -210,10 +214,9 @@ namespace Scribble.CodeSnippets
         public static UpdateResult Update(string codeFolder, string[] extensionsToSearch, string docsFolder)
         {
             var result = new UpdateResult();
-            var codeFiles = extensionsToSearch.SelectMany(
-                extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories));
 
-            var snippets = GetCodeSnippets(codeFiles);
+            var codeParser = new CodeFileParser(codeFolder);
+            var snippets = codeParser.Parse(extensionsToSearch);
 
             var incompleteSnippets = snippets.Where(s => string.IsNullOrWhiteSpace(s.Value)).ToArray();
             if (incompleteSnippets.Any())
@@ -227,32 +230,12 @@ namespace Scribble.CodeSnippets
 
             result.Snippets = snippets.Count;
 
-            var inputFiles = new[] { "*.md","*.mdown","*.markdown" }.SelectMany(
-              extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories));
-
-            foreach (var inputFile in inputFiles)
-            {
-                var newText = ApplySnippets(snippets, inputFile);
-                File.WriteAllText(inputFile, newText);
-            }
+            var documentationUpdater = new MarkdownFileParser(docsFolder);
+            documentationUpdater.Apply(snippets);
 
             result.Completed = true;
 
             return result;
         }
-    }
-
-    public class UpdateResult
-    {
-        public UpdateResult()
-        {
-            Messages = new List<string>();
-        }
-
-        public int Snippets { get; set; }
-
-        public List<string> Messages { get; set; }
-
-        public bool Completed { get; set; }
     }
 }

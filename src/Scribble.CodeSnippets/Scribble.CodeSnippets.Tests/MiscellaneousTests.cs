@@ -12,9 +12,9 @@ namespace Scribble.CodeSnippet.Tests
         public void GetCodeSnippets_ReturnsMultipleResults_AllHaveValues()
         {
             var directory = GetCurrentDirectory(@"data\get-code-snippets\");
-            var codeFile = Path.Combine(directory, @"code.cs");
 
-            var actual = Importer.GetCodeSnippets(new[] { codeFile });
+            var parser = new CodeFileParser(directory);
+            var actual = parser.Parse(f => f.EndsWith("code.cs"));
 
             Assert.True(actual.Count > 1);
             Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
@@ -24,9 +24,9 @@ namespace Scribble.CodeSnippet.Tests
         public void GetCodeSnippets_WithNestedSnippets_ReturnsTwoValues()
         {
             var directory = GetCurrentDirectory(@"data\get-code-snippets\");
-            var codeFile = Path.Combine(directory, @"nested-code.cs");
-
-            var actual = Importer.GetCodeSnippets(new[] { codeFile });
+            
+            var parser = new CodeFileParser(directory);
+            var actual = parser.Parse(f => f.EndsWith("nested-code.cs"));
 
             Assert.Equal(2, actual.Count);
             Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
@@ -40,7 +40,11 @@ namespace Scribble.CodeSnippet.Tests
             var inputFile = Path.Combine(directory, @"input.md");
             var outputFile = Path.Combine(directory, @"output.md");
 
-            var snippets = Importer.GetCodeSnippets(new[] { codeFile });
+
+            var parser = new CodeFileParser(directory);
+            var snippets = parser.Parse(f => f.EndsWith("code.cs"));
+
+            
             var actual = Importer.ApplySnippets(snippets, inputFile);
 
             var expected = File.ReadAllText(outputFile);
@@ -51,7 +55,7 @@ namespace Scribble.CodeSnippet.Tests
         public void Update_UsingSourceAndDocsFolder_WillReturnCodeSnippetCount()
         {
             var directory = GetCurrentDirectory(@"data\test-site\");
-            
+
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
@@ -68,7 +72,7 @@ namespace Scribble.CodeSnippet.Tests
             var docsFolder = Path.Combine(directory, @"docs\");
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            Assert.True(result.Completed);
+            Assert.Equal(14, result.Snippets);
         }
 
         [Fact]
