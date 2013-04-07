@@ -153,3 +153,5 @@ $RECYCLE.BIN/
 packages
 
 CommonAssemblyInfo.cs
+
+src/package/tools/codesnippets/*
