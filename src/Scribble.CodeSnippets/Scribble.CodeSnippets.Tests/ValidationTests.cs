@@ -56,7 +56,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.True(result.Completed);
         }
 
-        [Fact(Skip = "Todo")]
+        [Fact(Skip="Requires breaking some tests to refactor the API away")]
         public void When_Code_Snippet_Defined_But_Not_Used_In_Docs_Displays_Warning_Message()
         {
             var directory = @"data\validation\no-reference\".ToCurrentDirectory();
@@ -66,7 +66,7 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            var error = result.Errors.First();
+            var error = result.Warnings.First();
             // message explains error
             Assert.Equal(error.Message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
             

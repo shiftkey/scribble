@@ -17,9 +17,9 @@ namespace Scribble.CodeSnippets
             this.docsFolder = docsFolder;
         }
 
-        public FooResult Apply(ICollection<CodeSnippet> snippets)
+        public DocumentProcessResult Apply(ICollection<CodeSnippet> snippets)
         {
-            var result = new FooResult();
+            var result = new DocumentProcessResult();
 
             var inputFiles = new[] { "*.md", "*.mdown", "*.markdown" }.SelectMany(
               extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories))
@@ -55,7 +55,7 @@ namespace Scribble.CodeSnippets
             var codeSnippet = FormatTextAsCodeSnippet(value, lookup);
 
             var startIndex = 0;
-            var indexOf = baseLineText.IndexOf(lookup, startIndex, StringComparison.Ordinal);
+            var indexOf = IndexOfOrdinal(baseLineText, lookup, startIndex);
 
             while (indexOf > -1)
             {

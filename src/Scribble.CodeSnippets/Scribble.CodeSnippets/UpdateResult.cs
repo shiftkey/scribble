@@ -6,20 +6,23 @@ namespace Scribble.CodeSnippets
     {
         public UpdateResult()
         {
-            Errors = new List<ScribbleError>();
+            Errors = new List<ScribbleMessage>();
+            Warnings = new List<ScribbleMessage>();
         }
-
-        public int Snippets { get; set; }
-
-        public List<ScribbleError> Errors { get; set; }
 
         public bool Completed { get; set; }
 
+        public int Snippets { get; set; }
+
         public int Files { get; set; }
+
+        public List<ScribbleMessage> Warnings { get; set; }
+
+        public List<ScribbleMessage> Errors { get; set; }
     }
 
-    public class FooResult
+    public class FileProcessResult
     {
-        public int Count { get; set; }
+        public string NewText { get; set; }
     }
 }

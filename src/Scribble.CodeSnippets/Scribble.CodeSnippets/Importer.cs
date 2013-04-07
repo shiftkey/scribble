@@ -24,6 +24,15 @@ namespace Scribble.CodeSnippets
             var processor = new DocumentFileProcessor(docsFolder);
             var processResult = processor.Apply(snippets);
 
+            if (processResult.HasMessages)
+            {
+                var warnings = ErrorFormatter.Format(processResult.Warnings);
+                result.Warnings.AddRange(warnings);
+
+                var errors = ErrorFormatter.Format(processResult.Errors);
+                result.Errors.AddRange(errors);    
+            }
+
             result.Files = processResult.Count;
             result.Completed = true;
 
