@@ -15,7 +15,7 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             Assert.False(result.Completed);
         }
@@ -30,7 +30,7 @@ namespace Scribble.CodeSnippet.Tests
 
             var expectedFile = Path.Combine(docsFolder, "index.md");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Errors.First();
 
@@ -52,7 +52,7 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             Assert.True(result.Completed);
         }
@@ -67,7 +67,7 @@ namespace Scribble.CodeSnippet.Tests
 
             var expectedFile = Path.Combine(codeFolder, "code.cs");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var warning = result.Warnings.First();
             // message explains error
@@ -90,7 +90,7 @@ namespace Scribble.CodeSnippet.Tests
 
             var expectedFile = Path.Combine(codeFolder, "code.cs");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Errors.First();
 
@@ -112,7 +112,7 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
-            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             Assert.False(result.Completed);
         }

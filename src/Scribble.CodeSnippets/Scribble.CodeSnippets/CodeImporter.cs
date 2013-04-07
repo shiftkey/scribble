@@ -3,7 +3,7 @@ using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
 {
-    public class Importer
+    public class CodeImporter
     {
         public static UpdateResult Update(string codeFolder, string[] extensionsToSearch, string docsFolder)
         {
