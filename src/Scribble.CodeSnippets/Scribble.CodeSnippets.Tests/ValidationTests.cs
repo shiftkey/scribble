@@ -18,10 +18,9 @@ namespace Scribble.CodeSnippet.Tests
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Messages.First();
+            var message = error.Message;
 
-            Assert.Equal(error, "Could not find a code snippet for reference 'LinqToJsonCreateParse'");
-
-            // TODO: include file path?
+            Assert.Equal(message, "Could not find a code snippet for reference 'LinqToJsonCreateParse'");
             // TODO: debug mode?
             // TODO: i18n?
         }
@@ -37,7 +36,8 @@ namespace Scribble.CodeSnippet.Tests
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Messages.First();
-            Assert.Equal(error, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
+            var message = error.Message;
+            Assert.Equal(message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
             // TODO: include file path? line?
             // TODO: debug mode?
         }
@@ -55,9 +55,9 @@ namespace Scribble.CodeSnippet.Tests
             Assert.False(result.Completed);
 
             var error = result.Messages.First();
-            Assert.Equal(error, "Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').");
-            // TODO: include file path? line?
-            // TODO: debug mode?
+            
+            Assert.Equal(error.Message, "Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').");
+            Assert.True(error.File.EndsWith("code.cs"));
         }
     }
 }

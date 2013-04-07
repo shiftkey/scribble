@@ -49,7 +49,11 @@ namespace Scribble.CodeSnippets
             {
                 var lines = File.ReadAllLines(file);
 
-                var innerList = GetCodeSnippetsFromFile(lines);
+                var innerList = GetCodeSnippetsFromFile(lines).ToArray();
+                foreach (var snippet in innerList)
+                {
+                    snippet.File = file;
+                }
 
                 codeSnippets.AddRange(innerList);
             }
