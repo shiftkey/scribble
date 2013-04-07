@@ -28,6 +28,8 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
+            var expectedFile = Path.Combine(docsFolder, "index.md");
+
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Errors.First();
@@ -36,8 +38,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Equal(error.Message, "Could not find a code snippet for reference 'LinqToJsonCreateParse'");
 
             // file is as we expected
-            Assert.True(error.File.StartsWith(docsFolder));
-            Assert.True(error.File.EndsWith("index.md"));
+            Assert.Equal(error.File, expectedFile);
 
             // and we have the right line number to look at
             Assert.Equal(15, error.LineNumber);
@@ -64,6 +65,8 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
+            var expectedFile = Path.Combine(codeFolder, "code.cs");
+
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var warning = result.Warnings.First();
@@ -71,8 +74,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Equal(warning.Message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
 
             // file is as we expected
-            Assert.True(warning.File.StartsWith(codeFolder));
-            Assert.True(warning.File.EndsWith("code.cs"));
+            Assert.Equal(warning.File, expectedFile);
 
             // and we have the right line number to look at
             Assert.Equal(32, warning.LineNumber);
@@ -86,6 +88,8 @@ namespace Scribble.CodeSnippet.Tests
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
 
+            var expectedFile = Path.Combine(codeFolder, "code.cs");
+
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var error = result.Errors.First();
@@ -94,8 +98,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Equal(error.Message, "Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').");
 
             // file is as we expected
-            Assert.True(error.File.StartsWith(codeFolder));
-            Assert.True(error.File.EndsWith("code.cs"));
+            Assert.Equal(error.File, expectedFile);
 
             // and we have the right line number to look at
             Assert.Equal(30, error.LineNumber);
