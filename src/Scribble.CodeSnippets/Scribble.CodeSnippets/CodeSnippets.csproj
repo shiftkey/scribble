@@ -43,6 +43,7 @@
     <Compile Include="CodeFileParser.cs" />
     <Compile Include="CodeSnippet.cs" />
     <Compile Include="DocumentFileProcessor.cs" />
+    <Compile Include="ErrorFormatter.cs" />
     <Compile Include="Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateResult.cs" />

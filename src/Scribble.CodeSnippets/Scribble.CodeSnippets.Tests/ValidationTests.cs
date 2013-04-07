@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Scribble.CodeSnippets;
 using Xunit;
 
@@ -16,7 +17,10 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            Assert.Contains("Could not find a code snippet for reference 'LinqToJsonCreateParse'", result.Messages);
+            var error = result.Messages.First();
+
+            Assert.Equal(error, "Could not find a code snippet for reference 'LinqToJsonCreateParse'");
+
             // TODO: include file path?
             // TODO: debug mode?
             // TODO: i18n?
@@ -32,7 +36,8 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            Assert.Contains("Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed", result.Messages);
+            var error = result.Messages.First();
+            Assert.Equal(error, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
             // TODO: include file path? line?
             // TODO: debug mode?
         }
@@ -48,7 +53,9 @@ namespace Scribble.CodeSnippet.Tests
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             Assert.False(result.Completed);
-            Assert.Contains("Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').", result.Messages);
+
+            var error = result.Messages.First();
+            Assert.Equal(error, "Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').");
             // TODO: include file path? line?
             // TODO: debug mode?
         }

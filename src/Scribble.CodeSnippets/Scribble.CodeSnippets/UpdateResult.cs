@@ -14,5 +14,12 @@ namespace Scribble.CodeSnippets
         public List<string> Messages { get; set; }
 
         public bool Completed { get; set; }
+
+        public int Files { get; set; }
+    }
+
+    public class FooResult
+    {
+        public int Count { get; set; }
     }
 }

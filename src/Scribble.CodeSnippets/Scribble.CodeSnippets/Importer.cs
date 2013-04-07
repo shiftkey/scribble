@@ -14,18 +14,17 @@ namespace Scribble.CodeSnippets
             var incompleteSnippets = snippets.Where(s => string.IsNullOrWhiteSpace(s.Value)).ToArray();
             if (incompleteSnippets.Any())
             {
-                result.Messages.AddRange(
-                    incompleteSnippets.Select(i =>
-                        string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}').", i.Key)));
-
+                var messages = ErrorFormatter.Format(incompleteSnippets);
+                result.Messages.AddRange(messages);
                 return result;
             }
 
             result.Snippets = snippets.Count;
 
             var processor = new DocumentFileProcessor(docsFolder);
-            processor.Apply(snippets);
+            var processResult = processor.Apply(snippets);
 
+            result.Files = processResult.Count;
             result.Completed = true;
 
             return result;

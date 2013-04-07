@@ -19,6 +19,18 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
+        public void Update_UsingSourceAndDocsFolder_WillReturnCodeFileCount()
+        {
+            var directory = @"data\test-site\".ToCurrentDirectory();
+
+            var codeFolder = Path.Combine(directory, @"source\");
+            var docsFolder = Path.Combine(directory, @"docs\");
+            var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+
+            Assert.Equal(1, result.Files);
+        }
+
+        [Fact]
         public void Update_UsingSourceAndDocsFolder_ReturnsTrue()
         {
             var directory = @"data\test-site\".ToCurrentDirectory();

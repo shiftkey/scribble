@@ -17,16 +17,23 @@ namespace Scribble.CodeSnippets
             this.docsFolder = docsFolder;
         }
 
-        public void Apply(ICollection<CodeSnippet> snippets)
+        public FooResult Apply(ICollection<CodeSnippet> snippets)
         {
+            var result = new FooResult();
+
             var inputFiles = new[] { "*.md", "*.mdown", "*.markdown" }.SelectMany(
-              extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories));
+              extension => Directory.GetFiles(docsFolder, extension, SearchOption.AllDirectories))
+              .ToArray();
+
+            result.Count = inputFiles.Count();
 
             foreach (var inputFile in inputFiles)
             {
                 var newText = Apply(snippets, inputFile);
                 File.WriteAllText(inputFile, newText);
             }
+
+            return result;
         }
 
         public static string Apply(ICollection<CodeSnippet> snippets, string inputFile)
