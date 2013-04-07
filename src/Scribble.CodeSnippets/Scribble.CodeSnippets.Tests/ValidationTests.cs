@@ -7,7 +7,7 @@ namespace Scribble.CodeSnippet.Tests
 {
     public class ValidationTests
     {
-        [Fact(Skip = "Todo")]
+        [Fact]
         public void When_Tag_Found_In_Docs_But_Not_Found_In_Code_Returns_False()
         {
             var directory = @"data\validation\no-snippets\".ToCurrentDirectory();
@@ -20,8 +20,8 @@ namespace Scribble.CodeSnippet.Tests
             Assert.False(result.Completed);
         }
 
-        [Fact(Skip = "Todo")]
-        public void When_Tag_Found_In_Docs_But_Not_Found_In_Code_Display_Message()
+        [Fact]
+        public void When_Tag_Found_In_Docs_But_Not_Found_In_Code_Display_Error()
         {
             var directory = @"data\validation\no-snippets\".ToCurrentDirectory();
 
@@ -36,11 +36,8 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Equal(error.Message, "Could not find a code snippet for reference 'LinqToJsonCreateParse'");
 
             // file is as we expected
-            Assert.True(error.File.StartsWith(codeFolder));
-            Assert.True(error.File.EndsWith("code.cs"));
-
-            // and we have the right line number to look at
-            Assert.Equal(error.LineNumber, 30);
+            Assert.True(error.File.StartsWith(docsFolder));
+            Assert.True(error.File.EndsWith("index.md"));
         }
 
         [Fact]
@@ -66,16 +63,16 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = Importer.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
-            var error = result.Warnings.First();
+            var warning = result.Warnings.First();
             // message explains error
-            Assert.Equal(error.Message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
+            Assert.Equal(warning.Message, "Code snippet reference 'LinqToJsonCreateParse' is not used in any pages and can be removed");
             
             // file is as we expected
-            Assert.True(error.File.StartsWith(codeFolder));
-            Assert.True(error.File.EndsWith("code.cs"));
+            Assert.True(warning.File.StartsWith(codeFolder));
+            Assert.True(warning.File.EndsWith("code.cs"));
 
             // and we have the right line number to look at
-            Assert.Equal(32, error.LineNumber);
+            Assert.Equal(32, warning.LineNumber);
         }
 
         [Fact]

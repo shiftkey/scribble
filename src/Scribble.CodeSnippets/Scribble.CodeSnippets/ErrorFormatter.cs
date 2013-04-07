@@ -8,7 +8,7 @@ namespace Scribble.CodeSnippets
         public static IEnumerable<ScribbleMessage> FormatIncomplete(CodeSnippet[] incompleteSnippets)
         {
             return incompleteSnippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
-                                                  .Select(ToNotFoundMessage);
+                                     .Select(ToNotFoundMessage);
         }
 
         static ScribbleMessage ToNotFoundMessage(CodeSnippet snippet)
@@ -45,5 +45,21 @@ namespace Scribble.CodeSnippets
                 Message = string.Format("Code snippet reference '{0}' is not used in any pages and can be removed", snippet.Key)
             };
         }
+
+        public static IEnumerable<ScribbleMessage> FormatNotFound(List<CodeSnippetReference> codeSnippets)
+        {
+            return codeSnippets.Select(ToRequiredMessage);
+        }
+
+
+        static ScribbleMessage ToRequiredMessage(CodeSnippetReference snippet)
+        {
+            return new ScribbleMessage
+            {
+                File = snippet.File,
+                Message = string.Format("Could not find a code snippet for reference '{0}'", snippet.Key)
+            };
+        }
+
     }
 }

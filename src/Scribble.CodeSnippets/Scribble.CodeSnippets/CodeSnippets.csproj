@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CodeFileParser.cs" />
     <Compile Include="CodeSnippet.cs" />
+    <Compile Include="CodeSnippetReference.cs" />
     <Compile Include="DocumentFileProcessor.cs" />
     <Compile Include="DocumentProcessResult.cs" />
     <Compile Include="ErrorFormatter.cs" />

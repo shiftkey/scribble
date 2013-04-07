@@ -8,6 +8,7 @@ namespace Scribble.CodeSnippets
         public DocumentProcessResult()
         {
             SnippetsUsed = new List<CodeSnippet>();
+            SnippetReferences = new List<CodeSnippetReference>();
             
             Warnings = new object[0];
             Errors = new object[0];
@@ -24,6 +25,7 @@ namespace Scribble.CodeSnippets
         }
 
         public List<CodeSnippet> SnippetsUsed { get; set; }
+        public List<CodeSnippetReference> SnippetReferences { get; set; }
 
         public void Include(List<CodeSnippet> snippets)
         {
@@ -34,6 +36,18 @@ namespace Scribble.CodeSnippets
                
                 SnippetsUsed.Add(snippet);
             }
+        }
+
+        public void Include(IEnumerable<CodeSnippetReference> references)
+        {
+            foreach (var reference in references)
+            {
+                if (SnippetsUsed.Any(s => s.Key == reference.Key))
+                    continue;
+
+                SnippetReferences.Add(reference);
+            }
+            
         }
     }
 }

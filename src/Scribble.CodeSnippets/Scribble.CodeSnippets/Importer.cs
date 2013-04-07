@@ -26,23 +26,25 @@ namespace Scribble.CodeSnippets
 
             var snippetsNotUsed = snippets.Except(processResult.SnippetsUsed).ToArray();
 
+            var snippetsMissed = processResult.SnippetReferences;
+
+            if (snippetsMissed.Any())
+            {
+                var messages = ErrorFormatter.FormatNotFound(snippetsMissed);
+                result.Errors.AddRange(messages);
+            }
+
             if (snippetsNotUsed.Any())
             {
                 var messages = ErrorFormatter.FormatUnused(snippetsNotUsed);
                 result.Warnings.AddRange(messages);
             }
 
-            if (processResult.HasMessages)
-            {
-                var warnings = ErrorFormatter.Format(processResult.Warnings);
-                result.Warnings.AddRange(warnings);
-
-                var errors = ErrorFormatter.Format(processResult.Errors);
-                result.Errors.AddRange(errors);    
-            }
+            result.Warnings.AddRange(ErrorFormatter.Format(processResult.Warnings));
+            result.Errors.AddRange(ErrorFormatter.Format(processResult.Errors));
 
             result.Files = processResult.Count;
-            result.Completed = true;
+            result.Completed = !result.Errors.Any();
 
             return result;
         }

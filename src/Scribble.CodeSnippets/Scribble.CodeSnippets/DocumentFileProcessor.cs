@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Scribble.CodeSnippets
 {
@@ -31,6 +32,13 @@ namespace Scribble.CodeSnippets
             {
                 var fileResult = Apply(snippets, inputFile);
 
+                if (fileResult.RequiredSnippets.Any())
+                {
+                    // give up if we can't continue
+                    result.Include(fileResult.RequiredSnippets);
+                    return result;
+                }
+
                 result.Include(fileResult.Snippets);
 
                 File.WriteAllText(inputFile, fileResult.Text);
@@ -44,6 +52,21 @@ namespace Scribble.CodeSnippets
             var result = new FileProcessResult();
 
             var baselineText = File.ReadAllText(inputFile);
+
+            var matches = Regex.Matches(baselineText, @"<!--[\s]*import[\s]*(?<key>[\w-]*)[\s]*-->");
+
+            // ensure the required keys match what we have been provided
+            var expectedKeys = matches.Cast<Match>().Select(m => m.Groups["key"].Value);
+            var foundKeys = snippets.Select(m => m.Key);
+
+            var missingKeys = expectedKeys.Except(foundKeys).ToArray();
+            if (missingKeys.Any())
+            {
+                result.RequiredSnippets = missingKeys.Select(
+                    key => new CodeSnippetReference() { File = inputFile, Key = key});
+                result.Text = baselineText;
+                return result;
+            }
 
             foreach (var snippet in snippets)
             {
