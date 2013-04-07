@@ -12,13 +12,14 @@ namespace Scribble.CodeSnippet.Tests
     public class ImportTestSuite
     {
         [Theory, PropertyData("Scenarios")]
-        public void Scenario(string name, string codeFile, string inputFile, string expectedFile)
+        public void Scenario(string name, string folder, string inputFile, string expectedFile)
         {
             var expectedContents = File.ReadAllText(expectedFile);
-            var codeContents = File.OpenRead(codeFile);
-            var inputContents = File.OpenRead(inputFile);
 
-            var actual = Importer.Process(codeContents, inputContents);
+            var parser = new CodeFileParser(folder);
+            var snippets = parser.Parse(f => f.EndsWith("code.cs"));
+
+            var actual = DocumentFileProcessor.Apply(snippets, inputFile);
 
             Assert.Equal(expectedContents, actual);
         }
@@ -33,10 +34,9 @@ namespace Scribble.CodeSnippet.Tests
                 return (from folder in folders
                         let info = new DirectoryInfo(folder)
                         let name = info.Name
-                        let codeFile = Path.Combine(folder, "code.cs")
                         let inputFile = Path.Combine(folder, "input.md")
                         let outputFile = Path.Combine(folder, "output.md")
-                        select new object[] { name, codeFile, inputFile, outputFile }).ToList();
+                        select new object[] { name, folder, inputFile, outputFile }).ToList();
             }
         }
 

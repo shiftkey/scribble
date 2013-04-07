@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="CodeFileParser.cs" />
     <Compile Include="CodeSnippet.cs" />
-    <Compile Include="MarkdownFileParser.cs" />
+    <Compile Include="DocumentFileProcessor.cs" />
     <Compile Include="Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateResult.cs" />

@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Scribble.CodeSnippets
 {
-    public class MarkdownFileParser
+    public class DocumentFileProcessor
     {
         const string LineEnding = "\r\n";
 
         readonly string docsFolder;
 
-        public MarkdownFileParser(string docsFolder)
+        public DocumentFileProcessor(string docsFolder)
         {
             this.docsFolder = docsFolder;
         }
@@ -24,12 +24,12 @@ namespace Scribble.CodeSnippets
 
             foreach (var inputFile in inputFiles)
             {
-                var newText = ApplySnippets(snippets, inputFile);
+                var newText = Apply(snippets, inputFile);
                 File.WriteAllText(inputFile, newText);
             }
         }
 
-        public static string ApplySnippets(ICollection<CodeSnippet> snippets, string inputFile)
+        public static string Apply(ICollection<CodeSnippet> snippets, string inputFile)
         {
             var baselineText = File.ReadAllText(inputFile);
 

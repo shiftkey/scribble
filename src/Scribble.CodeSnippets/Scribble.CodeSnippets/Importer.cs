@@ -101,7 +101,7 @@ namespace Scribble.CodeSnippets
             return true;
         }
 
-        [Obsolete("Moving this into MarkdownFileParser")]
+        [Obsolete("Moving this into DocumentFileProcessor")]
         static string ProcessMatch(string key, string value, string baseLineText)
         {
             var lookup = string.Format("<!-- import {0} -->", key);
@@ -199,7 +199,7 @@ namespace Scribble.CodeSnippets
             return s.Length;
         }
 
-        [Obsolete("Moving this into MarkdownFileParser")]
+        [Obsolete("Moving this into DocumentFileProcessor")]
         public static string ApplySnippets(ICollection<CodeSnippet> snippets, string inputFile)
         {
             var baselineText = File.ReadAllText(inputFile);
@@ -231,8 +231,8 @@ namespace Scribble.CodeSnippets
 
             result.Snippets = snippets.Count;
 
-            var documentationUpdater = new MarkdownFileParser(docsFolder);
-            documentationUpdater.Apply(snippets);
+            var processor = new DocumentFileProcessor(docsFolder);
+            processor.Apply(snippets);
 
             result.Completed = true;
 
