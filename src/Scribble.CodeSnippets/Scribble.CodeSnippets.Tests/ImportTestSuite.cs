@@ -14,14 +14,12 @@ namespace Scribble.CodeSnippet.Tests
         [Theory, PropertyData("Scenarios")]
         public void Scenario(string name, string folder, string inputFile, string expectedFile)
         {
-            var expectedContents = File.ReadAllText(expectedFile);
-
             var parser = new CodeFileParser(folder);
             var snippets = parser.Parse(f => f.EndsWith("code.cs"));
 
-            var actual = DocumentFileProcessor.Apply(snippets, inputFile);
+            var result = DocumentFileProcessor.Apply(snippets, inputFile);
 
-            Assert.Equal(expectedContents, actual);
+            Assert.Equal(File.ReadAllText(expectedFile), result.Text);
         }
 
         public static IEnumerable<object[]> Scenarios

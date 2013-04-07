@@ -41,10 +41,9 @@ namespace Scribble.CodeSnippet.Tests
             var parser = new CodeFileParser(directory);
             var snippets = parser.Parse(f => f.EndsWith("code.cs"));
 
-            var actual = DocumentFileProcessor.Apply(snippets, inputFile);
+            var result = DocumentFileProcessor.Apply(snippets, inputFile);
 
-            var expected = File.ReadAllText(outputFile);
-            Assert.Equal(expected, actual);
+            Assert.Equal(File.ReadAllText(outputFile), result.Text);
         }
     }
 }

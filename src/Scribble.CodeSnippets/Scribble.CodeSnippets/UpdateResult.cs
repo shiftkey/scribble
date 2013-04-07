@@ -23,6 +23,6 @@ namespace Scribble.CodeSnippets
 
     public class FileProcessResult
     {
-        public string NewText { get; set; }
+        public string Text { get; set; }
     }
 }

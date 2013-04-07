@@ -29,14 +29,15 @@ namespace Scribble.CodeSnippets
 
             foreach (var inputFile in inputFiles)
             {
-                var newText = Apply(snippets, inputFile);
-                File.WriteAllText(inputFile, newText);
+                var fileResult = Apply(snippets, inputFile);
+
+                File.WriteAllText(inputFile, fileResult.Text);
             }
 
             return result;
         }
 
-        public static string Apply(ICollection<CodeSnippet> snippets, string inputFile)
+        public static FileProcessResult Apply(ICollection<CodeSnippet> snippets, string inputFile)
         {
             var baselineText = File.ReadAllText(inputFile);
 
@@ -45,7 +46,7 @@ namespace Scribble.CodeSnippets
                 baselineText = ProcessMatch(snippet.Key, snippet.Value, baselineText);
             }
 
-            return baselineText;
+            return new FileProcessResult { Text = baselineText };
         }
 
         static string ProcessMatch(string key, string value, string baseLineText)
