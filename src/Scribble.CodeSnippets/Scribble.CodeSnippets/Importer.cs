@@ -15,6 +15,7 @@ namespace Scribble.CodeSnippets
 
         const string LineEnding = "\r\n";
 
+        [Obsolete("Where should this live?")]
         public static string Process(Stream code, Stream input)
         {
             var codeContents = new StreamReader(code)

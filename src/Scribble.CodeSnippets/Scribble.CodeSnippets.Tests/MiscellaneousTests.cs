@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Scribble.CodeSnippets;
@@ -36,15 +37,12 @@ namespace Scribble.CodeSnippet.Tests
         public void ApplySnippets_UsingFile_MatchesExpectedResult()
         {
             var directory = GetCurrentDirectory(@"data\apply-snippets\");
-            var codeFile = Path.Combine(directory, @"code.cs");
             var inputFile = Path.Combine(directory, @"input.md");
             var outputFile = Path.Combine(directory, @"output.md");
-
 
             var parser = new CodeFileParser(directory);
             var snippets = parser.Parse(f => f.EndsWith("code.cs"));
 
-            
             var actual = Importer.ApplySnippets(snippets, inputFile);
 
             var expected = File.ReadAllText(outputFile);
@@ -95,10 +93,10 @@ namespace Scribble.CodeSnippet.Tests
 
         static string GetCurrentDirectory(string relativePath)
         {
-            var fullPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
+            var fullPath = (new Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
             var directory = Path.GetDirectoryName(fullPath);
+            if (directory == null) throw new InvalidOperationException("The directory is null what even is it!");
             return Path.Combine(directory, relativePath);
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,11 +12,13 @@ namespace Scribble.CodeSnippet.Tests
     public class ImportTestSuite
     {
         [Theory, PropertyData("Scenarios")]
-        public void Scenario(string name, Stream code, Stream input, Stream expected)
+        public void Scenario(string name, string codeFile, string inputFile, string expectedFile)
         {
-            var expectedContents = new StreamReader(expected).ReadToEnd();
+            var expectedContents = File.ReadAllText(expectedFile);
+            var codeContents = File.OpenRead(codeFile);
+            var inputContents = File.OpenRead(inputFile);
 
-            var actual = Importer.Process(code, input);
+            var actual = Importer.Process(codeContents, inputContents);
 
             Assert.Equal(expectedContents, actual);
         }
@@ -24,30 +27,25 @@ namespace Scribble.CodeSnippet.Tests
         {
             get
             {
-                var scenarios = new List<object[]>();
-                var assembly = Assembly.GetExecutingAssembly();
-
-                // because why even return a sorted list here?
-                var resources = assembly.GetManifestResourceNames()
-                                        .Where(c => c.Contains(".scenarios."))
-                                        .OrderBy(c => c);
-
-                for (var i = 0; i < resources.Count(); i += 3)
-                {
-                    var firstResource = resources.ElementAt(i);
-
-                    // magic number representing assembly + folder length to ignore
-                    var name = firstResource.Substring(38, firstResource.IndexOf(".", 38) - 38);
-
-                    var codeStream = assembly.GetManifestResourceStream(firstResource);
-                    var inputStream = assembly.GetManifestResourceStream(resources.ElementAt(i + 1));
-                    var expectedStream = assembly.GetManifestResourceStream(resources.ElementAt(i + 2));
-
-                    scenarios.Add(new object[] { name, codeStream, inputStream, expectedStream });
-                }
-
-                return scenarios;
+                var directory = GetCurrentDirectory(@"scenarios\");
+                var folders = Directory.GetDirectories(directory);
+                
+                return (from folder in folders
+                        let info = new DirectoryInfo(folder)
+                        let name = info.Name
+                        let codeFile = Path.Combine(folder, "code.cs")
+                        let inputFile = Path.Combine(folder, "input.md")
+                        let outputFile = Path.Combine(folder, "output.md")
+                        select new object[] { name, codeFile, inputFile, outputFile }).ToList();
             }
+        }
+
+        static string GetCurrentDirectory(string relativePath)
+        {
+            var fullPath = (new Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
+            var directory = Path.GetDirectoryName(fullPath);
+            if (directory == null) throw new InvalidOperationException("The directory is null what even is it!");
+            return Path.Combine(directory, relativePath);
         }
     }
 }

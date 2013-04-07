@@ -78,9 +78,6 @@
     <None Include="data\validation\no-snippets\source\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="MiscellaneousTests.cs" />
-    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\code.cs" />
-    <EmbeddedResource Include="scenarios\8-SamplePage\code.cs" />
     <None Include="data\test-site\docs\index.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -90,53 +87,110 @@
     <None Include="data\test-site\source\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="scenarios\8-SamplePage\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\9-SamplePageWithCorrectSnippet\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\9-SamplePageWithCorrectSnippet\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\9-SamplePageWithCorrectSnippet\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="MiscellaneousTests.cs" />
     <Compile Include="ImportTestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\input.md" />
-    <EmbeddedResource Include="scenarios\9-SamplePageWithCorrectSnippet\output.md" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\output.md" />
-    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\input.md" />
-    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\output.md" />
-    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\input.md" />
-    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\input.md" />
-    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\output.md" />
-    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\input.md" />
-    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\output.md" />
-    <EmbeddedResource Include="scenarios\6-KeyNotFound\input.md" />
-    <EmbeddedResource Include="scenarios\6-KeyNotFound\output.md" />
-    <EmbeddedResource Include="scenarios\7-UseAUnitTest\input.md" />
-    <EmbeddedResource Include="scenarios\7-UseAUnitTest\output.md" />
-    <EmbeddedResource Include="scenarios\8-SamplePage\input.md" />
-    <EmbeddedResource Include="scenarios\8-SamplePage\output.md" />
-    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md" />
-    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md" />
+    <None Include="scenarios\1-UpdateSimpleFile\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\1-UpdateSimpleFile\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\2-UpdateSimpleFileMultipleTimes\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\2-UpdateSimpleFileMultipleTimes\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\5-UpdateSimpleFileKeepsSameText\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\5-UpdateSimpleFileKeepsSameText\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\6-KeyNotFound\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\6-KeyNotFound\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\7-UseAUnitTest\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\7-UseAUnitTest\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\8-SamplePage\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\8-SamplePage\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="data\validation\no-snippets\docs\index.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\1-UpdateSimpleFile\code.txt" />
+    <None Include="scenarios\1-UpdateSimpleFile\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\code.txt" />
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\2-UpdateSimpleFileMultipleTimes\code.txt" />
+    <None Include="scenarios\2-UpdateSimpleFileMultipleTimes\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\5-UpdateSimpleFileKeepsSameText\code.txt" />
+    <None Include="scenarios\5-UpdateSimpleFileKeepsSameText\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\6-KeyNotFound\code.txt" />
+    <None Include="scenarios\6-KeyNotFound\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\7-UseAUnitTest\code.cs" />
+    <None Include="scenarios\7-UseAUnitTest\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\code.txt" />
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\code.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scribble.CodeSnippets\CodeSnippets.csproj">
