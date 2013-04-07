@@ -55,15 +55,15 @@ namespace Scribble.CodeSnippets
             var codeSnippet = FormatTextAsCodeSnippet(value, lookup);
 
             var startIndex = 0;
-            var indexOf = baseLineText.IndexOf(lookup, startIndex);
+            var indexOf = baseLineText.IndexOf(lookup, startIndex, StringComparison.Ordinal);
 
             while (indexOf > -1)
             {
-                var endOfLine = baseLineText.IndexOf(LineEnding, indexOf + lookup.Length);
+                var endOfLine = IndexOfOrdinal(baseLineText, LineEnding, indexOf + lookup.Length);
                 if (endOfLine > -1)
                 {
                     const string blankLine = LineEnding + LineEnding;
-                    var endOfNextLine = baseLineText.IndexOf(blankLine, endOfLine);
+                    var endOfNextLine = IndexOfOrdinal(baseLineText, blankLine, endOfLine);
                     if (endOfNextLine > -1)
                     {
                         var start = endOfLine + 2;
@@ -86,7 +86,7 @@ namespace Scribble.CodeSnippets
                 baseLineText = baseLineText.Remove(indexOf, lookup.Length)
                                            .Insert(indexOf, codeSnippet);
 
-                indexOf = baseLineText.IndexOf(lookup, startIndex);
+                indexOf = IndexOfOrdinal(baseLineText, lookup, startIndex);
             }
             return baseLineText;
         }
@@ -97,10 +97,12 @@ namespace Scribble.CodeSnippets
 
             var linesInFile = valueWithoutEndings
                                       .Split(new[] { LineEnding }, StringSplitOptions.None)
-                                      .Select(l => l.Replace("\t", "    "));
+                                      .Select(l => l.Replace("\t", "    "))
+                                      .ToArray();
 
             var whiteSpaceStartValues = linesInFile.Select(SpacesAtStartOfString)
-                                                   .Where(count => count > 0);
+                                                   .Where(count => count > 0)
+                                                   .ToArray();
 
             var minWhiteSpace = whiteSpaceStartValues.Any()
                                     ? whiteSpaceStartValues.Min()
@@ -143,6 +145,11 @@ namespace Scribble.CodeSnippets
             sb.Append(temp);
 
             return sb.ToString();
+        }
+
+        static int IndexOfOrdinal(string text, string value, int startIndex)
+        {
+            return text.IndexOf(value, startIndex, StringComparison.Ordinal);
         }
     }
 }

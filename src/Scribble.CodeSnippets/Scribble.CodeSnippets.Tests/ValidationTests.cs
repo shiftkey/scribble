@@ -10,7 +10,7 @@ namespace Scribble.CodeSnippet.Tests
         [Fact(Skip = "Todo")]
         public void When_Tag_Found_In_Docs_But_Not_Found_In_Code_Returns_False()
         {
-            var directory = @"data\validation\site-no-snippets\".ToCurrentDirectory();
+            var directory = @"data\validation\no-snippets\".ToCurrentDirectory();
 
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
@@ -23,7 +23,7 @@ namespace Scribble.CodeSnippet.Tests
         [Fact(Skip = "Todo")]
         public void When_Tag_Found_In_Docs_But_Not_Found_In_Code_Display_Message()
         {
-            var directory = @"data\validation\site-no-snippets\".ToCurrentDirectory();
+            var directory = @"data\validation\no-snippets\".ToCurrentDirectory();
 
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
