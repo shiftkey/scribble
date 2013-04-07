@@ -40,6 +40,7 @@ namespace Scribble.CodeSnippet.Tests
             }
         }
 
+        [Obsolete]
         static string GetCurrentDirectory(string relativePath)
         {
             var fullPath = (new Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;

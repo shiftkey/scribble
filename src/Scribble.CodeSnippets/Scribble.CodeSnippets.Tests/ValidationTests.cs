@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using Scribble.CodeSnippets;
 using Xunit;
@@ -10,7 +11,7 @@ namespace Scribble.CodeSnippet.Tests
         [Fact(Skip = "Todo")]
         public void Display_Message_When_Tag_Found_In_Docs_But_Not_Found_In_Code()
         {
-            var directory = GetCurrentDirectory(@"data\validation\site-no-snippets\");
+            var directory = @"data\validation\site-no-snippets\".ToCurrentDirectory();
 
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
@@ -26,7 +27,7 @@ namespace Scribble.CodeSnippet.Tests
         [Fact(Skip = "Todo")]
         public void Display_Message_When_Code_Snippet_Defined_But_Not_Used_In_Docs()
         {
-            var directory = GetCurrentDirectory(@"data\validation\site-no-reference\");
+            var directory = @"data\validation\site-no-reference\".ToCurrentDirectory();
 
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
@@ -41,7 +42,7 @@ namespace Scribble.CodeSnippet.Tests
         [Fact]
         public void Display_Message_When_Unbalanced_Code_Snippet_Defined()
         {
-            var directory = GetCurrentDirectory(@"data\validation\bad-snippet\");
+            var directory = @"data\validation\bad-snippet\".ToCurrentDirectory();
 
             var codeFolder = Path.Combine(directory, @"source\");
             var docsFolder = Path.Combine(directory, @"docs\");
@@ -52,13 +53,6 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Contains("Code snippet reference 'ThisIsAInvalidCodeSnippet' was not closed (specify 'end code ThisIsAInvalidCodeSnippet').", result.Messages);
             // TODO: include file path? line?
             // TODO: debug mode?
-        }
-
-        static string GetCurrentDirectory(string relativePath)
-        {
-            var fullPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath;
-            var directory = Path.GetDirectoryName(fullPath);
-            return Path.Combine(directory, relativePath);
         }
     }
 }

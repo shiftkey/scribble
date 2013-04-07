@@ -56,6 +56,8 @@
     <None Include="data\validation\bad-snippet\source\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ImporterTests.cs" />
     <Compile Include="ValidationTests.cs" />
     <None Include="data\apply-snippets\input.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -99,7 +101,7 @@
     <None Include="scenarios\9-SamplePageWithCorrectSnippet\output.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="MiscellaneousTests.cs" />
+    <Compile Include="CodeFileParserTests.cs" />
     <Compile Include="ImportTestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
