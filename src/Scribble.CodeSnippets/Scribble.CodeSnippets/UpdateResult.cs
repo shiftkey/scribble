@@ -6,12 +6,12 @@ namespace Scribble.CodeSnippets
     {
         public UpdateResult()
         {
-            Messages = new List<ScribbleError>();
+            Errors = new List<ScribbleError>();
         }
 
         public int Snippets { get; set; }
 
-        public List<ScribbleError> Messages { get; set; }
+        public List<ScribbleError> Errors { get; set; }
 
         public bool Completed { get; set; }
 

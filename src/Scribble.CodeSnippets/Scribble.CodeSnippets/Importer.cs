@@ -15,7 +15,7 @@ namespace Scribble.CodeSnippets
             if (incompleteSnippets.Any())
             {
                 var messages = ErrorFormatter.Format(incompleteSnippets);
-                result.Messages.AddRange(messages);
+                result.Errors.AddRange(messages);
                 return result;
             }
 

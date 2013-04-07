@@ -14,17 +14,20 @@ namespace Scribble.CodeSnippets
     {
         public static IEnumerable<ScribbleError> Format(CodeSnippet[] incompleteSnippets)
         {
-            return incompleteSnippets.Select(AsNotFoundMessage);
+            var noValuesFound = incompleteSnippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
+                                                  .Select(ToNotFoundMessage);
+
+            return noValuesFound;
         }
 
-        public static ScribbleError AsNotFoundMessage(CodeSnippet snippet)
+        public static ScribbleError ToNotFoundMessage(CodeSnippet snippet)
         {
             return new ScribbleError
-                {
-                    File = snippet.File,
-                    LineNumber = snippet.StartRow,
-                    Message = string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}').", snippet.Key)
-                };
+            {
+                File = snippet.File,
+                LineNumber = snippet.StartRow,
+                Message = string.Format("Code snippet reference '{0}' was not closed (specify 'end code {0}').", snippet.Key)
+            };
         }
     }
 }
