@@ -23,6 +23,13 @@ namespace Scribble.CodeSnippets
 
     public class FileProcessResult
     {
+        public FileProcessResult()
+        {
+            Snippets = new List<CodeSnippet>();
+        }
+
         public string Text { get; set; }
+
+        public List<CodeSnippet> Snippets { get; set; }
     }
 }

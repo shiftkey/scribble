@@ -14,7 +14,7 @@ namespace Scribble.CodeSnippets
             var incompleteSnippets = snippets.Where(s => string.IsNullOrWhiteSpace(s.Value)).ToArray();
             if (incompleteSnippets.Any())
             {
-                var messages = ErrorFormatter.Format(incompleteSnippets);
+                var messages = ErrorFormatter.FormatIncomplete(incompleteSnippets);
                 result.Errors.AddRange(messages);
                 return result;
             }
@@ -23,6 +23,14 @@ namespace Scribble.CodeSnippets
 
             var processor = new DocumentFileProcessor(docsFolder);
             var processResult = processor.Apply(snippets);
+
+            var snippetsNotUsed = snippets.Except(processResult.SnippetsUsed).ToArray();
+
+            if (snippetsNotUsed.Any())
+            {
+                var messages = ErrorFormatter.FormatUnused(snippetsNotUsed);
+                result.Warnings.AddRange(messages);
+            }
 
             if (processResult.HasMessages)
             {

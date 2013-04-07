@@ -56,7 +56,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.True(result.Completed);
         }
 
-        [Fact(Skip="Requires breaking some tests to refactor the API away")]
+        [Fact]
         public void When_Code_Snippet_Defined_But_Not_Used_In_Docs_Displays_Warning_Message()
         {
             var directory = @"data\validation\no-reference\".ToCurrentDirectory();
@@ -75,7 +75,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.True(error.File.EndsWith("code.cs"));
 
             // and we have the right line number to look at
-            Assert.Equal(error.LineNumber, 30);
+            Assert.Equal(32, error.LineNumber);
         }
 
         [Fact]

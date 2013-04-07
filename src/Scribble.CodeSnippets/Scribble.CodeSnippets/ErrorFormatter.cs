@@ -5,15 +5,13 @@ namespace Scribble.CodeSnippets
 {
     public class ErrorFormatter
     {
-        public static IEnumerable<ScribbleMessage> Format(CodeSnippet[] incompleteSnippets)
+        public static IEnumerable<ScribbleMessage> FormatIncomplete(CodeSnippet[] incompleteSnippets)
         {
-            var noValuesFound = incompleteSnippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
+            return incompleteSnippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
                                                   .Select(ToNotFoundMessage);
-
-            return noValuesFound;
         }
 
-        public static ScribbleMessage ToNotFoundMessage(CodeSnippet snippet)
+        static ScribbleMessage ToNotFoundMessage(CodeSnippet snippet)
         {
             return new ScribbleMessage
             {
@@ -31,6 +29,21 @@ namespace Scribble.CodeSnippets
         public static IEnumerable<ScribbleMessage> Format(IEnumerable<object> messages)
         {
             return Enumerable.Empty<ScribbleMessage>();
+        }
+
+        public static IEnumerable<ScribbleMessage> FormatUnused(IEnumerable<CodeSnippet> codeSnippets)
+        {
+            return codeSnippets.Select(ToUnusedMessage);
+        }
+
+        static ScribbleMessage ToUnusedMessage(CodeSnippet snippet)
+        {
+            return new ScribbleMessage
+            {
+                File = snippet.File,
+                LineNumber = snippet.StartRow,
+                Message = string.Format("Code snippet reference '{0}' is not used in any pages and can be removed", snippet.Key)
+            };
         }
     }
 }

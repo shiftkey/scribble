@@ -31,6 +31,8 @@ namespace Scribble.CodeSnippets
             {
                 var fileResult = Apply(snippets, inputFile);
 
+                result.Include(fileResult.Snippets);
+
                 File.WriteAllText(inputFile, fileResult.Text);
             }
 
@@ -39,14 +41,29 @@ namespace Scribble.CodeSnippets
 
         public static FileProcessResult Apply(ICollection<CodeSnippet> snippets, string inputFile)
         {
+            var result = new FileProcessResult();
+
             var baselineText = File.ReadAllText(inputFile);
 
             foreach (var snippet in snippets)
             {
-                baselineText = ProcessMatch(snippet.Key, snippet.Value, baselineText);
+                // TODO: this won't change the text 
+                // if a snippet is unchanged
+                // so we need more context
+                var output = ProcessMatch(snippet.Key, snippet.Value, baselineText);
+
+                if (!string.Equals(output, baselineText))
+                {
+                    // we may have added in a snippet
+                    result.Snippets.Add(snippet);
+                }
+
+                baselineText = output;
             }
 
-            return new FileProcessResult { Text = baselineText };
+            result.Text = baselineText;
+
+            return result;
         }
 
         static string ProcessMatch(string key, string value, string baseLineText)
