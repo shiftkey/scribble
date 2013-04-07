@@ -40,7 +40,12 @@
     
     <MSBuild Projects="$(SourceDir)Scribble.CodeSnippets\Scribble.CodeSnippets.sln" Properties="Configuration=$(Configuration)" Targets="Rebuild" />
 
-    <MakeDir Directories="$(ArtifactsDir)" />
+    <ItemGroup>
+        <Binaries Include="$(SourceDir)Scribble.CodeSnippets\Scribble.CodeSnippets\bin\$(Configuration)\*.dll"/>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Binaries)"
+          DestinationFolder="$(SourceDir)package\tools\codesnippets\" />
 
     <Message Text="=========== Compile Done ===========" Importance="High" />
     
