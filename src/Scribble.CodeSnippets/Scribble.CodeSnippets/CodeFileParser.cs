@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Scribble.CodeSnippets.Infrastructure;
 using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
@@ -14,7 +15,7 @@ namespace Scribble.CodeSnippets
         const RegexOptions Options = RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline;
 
         const string LineEnding = "\r\n";
-        
+
         readonly string codeFolder;
 
         public CodeFileParser(string codeFolder)
@@ -46,11 +47,17 @@ namespace Scribble.CodeSnippets
 
             foreach (var file in codeFiles)
             {
-                var lines = File.ReadAllLines(file);
+                var message = string.Format("Processing '{0}'", file);
+                var contents = File.ReadAllText(file);
 
-                var innerList = GetCodeSnippetsUsingArray(lines, file);
-                //var innerList2 = GetCodeSnippetsUsingRegex(file, lines);
-                codeSnippets.AddRange(innerList);
+                if (!Regex.IsMatch(contents, @".*?start\s*code\s*")) continue;
+
+                var lines = contents.Split(new[] { "\r\n", "\n " }, StringSplitOptions.None);
+                using (TimingScope.Start(message))
+                {
+                    var innerList = GetCodeSnippetsUsingArray(lines, file);
+                    codeSnippets.AddRange(innerList);
+                }
             }
 
             return codeSnippets;

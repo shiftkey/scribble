@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BA9B31
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets", "Scribble.CodeSnippets\CodeSnippets.csproj", "{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets.LoadTests", "CodeSnippets.LoadTests\CodeSnippets.LoadTests.csproj", "{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
