@@ -48,7 +48,7 @@ If you were doing something with XML-like syntax (HTML/XAML/XML/etc), we could s
 
 The syntax rules are:
 
- - No spaces in the key - use dashes
+ - No spaces in the key - use dashes if that's your thing
  - If there is a mismatch between start and end keys, or a key could not be found, you should get a build warning message. 
  - Nested keys could work, if you want to really drive me insane.
 
