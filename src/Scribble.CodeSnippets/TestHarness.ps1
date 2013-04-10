@@ -1,6 +1,6 @@
-function Sync-Docs {
-    $root = "D:\Code\github\shiftkey\scribble\src\Scribble.CodeSnippets" 
-    $assemblyPath = Join-Path $root "Scribble.CodeSnippets\bin\Debug\Scribble.CodeSnippets.dll"
+function Update-Snippets {
+    $root = "D:\Code\github\shiftkey\scribble\" 
+    $assemblyPath = Join-Path $root "src\package\tools\codesnippets\Scribble.CodeSnippets.dll"
 
     $codeFolder = "D:\Code\github\shiftkey\Newtonsoft.Json\Src\"
     $docsFolder = "D:\Code\github\shiftkey\Newtonsoft.Json\docs\"
@@ -8,7 +8,7 @@ function Sync-Docs {
     [void][Reflection.Assembly]::LoadFile($assemblyPath)  
 
     # parse and merge files
-    [Scribble.CodeSnippets.Importer]::Update($codeFolder, @("*.cs"), $docsFolder)
+    [Scribble.CodeSnippets.CodeImporter]::Update($codeFolder, @("*.cs"), $docsFolder)
 }
 
-Sync-Docs
+Update-Snippets 
