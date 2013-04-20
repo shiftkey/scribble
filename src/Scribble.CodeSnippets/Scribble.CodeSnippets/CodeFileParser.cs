@@ -12,7 +12,7 @@ namespace Scribble.CodeSnippets
     {
         const string StartRegex = @".*?start\s*code\s*(?<key>[A-Za-z-]*)(?<language>[A-Za-z]*).*?";
         const string EndRegex = @".*?end\s*code\s*(?<key>[A-Za-z-]*)";
-        const RegexOptions Options = RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline;
+        const RegexOptions Options = RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline;
 
         const string LineEnding = "\r\n";
 
@@ -47,12 +47,16 @@ namespace Scribble.CodeSnippets
 
             foreach (var file in codeFiles)
             {
-                var message = string.Format("Processing '{0}'", file);
-                var contents = File.ReadAllText(file);
-
-                if (!Regex.IsMatch(contents, @".*?start\s*code\s*")) continue;
+                var reading = string.Format("Reading '{0}'", file);
+                string contents;
+                using (TimingScope.Start(reading))
+                {
+                    contents = File.ReadAllText(file);
+                    if (Regex.Matches(contents, @".*?\s*start\s*code\s*", RegexOptions.Compiled).Count == 0) continue;
+                }
 
                 var lines = contents.Split(new[] { "\r\n", "\n " }, StringSplitOptions.None);
+                var message = string.Format("Processing '{0}'", file);
                 using (TimingScope.Start(message))
                 {
                     var innerList = GetCodeSnippetsUsingArray(lines, file);
@@ -122,6 +126,5 @@ namespace Scribble.CodeSnippets
             if (Regex.IsMatch(s, EndRegex, Options)) return false;
             return true;
         }
-
     }
 }

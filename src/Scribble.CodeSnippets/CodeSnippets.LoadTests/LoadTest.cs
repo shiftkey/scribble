@@ -14,7 +14,7 @@ namespace CodeSnippets.LoadTests
 
             var codeFolder = Path.Combine(directory, @"Src\");
             var docsFolder = Path.Combine(directory, @"docs\");
-            var result = CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { "*Tests.cs" }, docsFolder);
 
             Console.WriteLine("Completed: {0}", result.Completed);
             Console.WriteLine("Duration: {0}ms", result.ElapsedMilliseconds);
