@@ -8,5 +8,6 @@ Why?
 Ideas
 
  - hook into VS build events so that you can update code snippets that actually compile!
+ - highlight code snippets inside the VS text editor
  - easy access to documentation (think folder view in Sublime Text) without needing to access Package Manager Console
  
