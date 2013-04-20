@@ -1,4 +1,4 @@
-# [Proposal] Import Code Snippet 
+# Import Code Snippets
 
 Now we get into the fun stuff.
 
