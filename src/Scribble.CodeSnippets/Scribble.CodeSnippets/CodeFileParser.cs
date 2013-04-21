@@ -23,7 +23,7 @@ namespace Scribble.CodeSnippets
             this.codeFolder = codeFolder;
         }
 
-        public ICollection<CodeSnippet> Parse(string[] extensionsToSearch)
+        public ICollection<CodeSnippet> Parse(string[] filterOnExpression)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Scribble.CodeSnippets
 
                 var filesMatchingRegex = new List<string>();
 
-                foreach (var regex in extensionsToSearch)
+                foreach (var regex in filterOnExpression)
                 {
                     foreach (var f in allFiles)
                     {
@@ -47,7 +47,7 @@ namespace Scribble.CodeSnippets
             catch (ArgumentException ex)
             {
                 // right so someone is passing in a regex
-                var filesMatchingExtensions = extensionsToSearch.SelectMany(
+                var filesMatchingExtensions = filterOnExpression.SelectMany(
                     extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories)).ToList();
                 return GetCodeSnippets(filesMatchingExtensions);
             }

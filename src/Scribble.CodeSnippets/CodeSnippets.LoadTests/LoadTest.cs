@@ -7,14 +7,14 @@ namespace CodeSnippets.LoadTests
 {
     public class LoadTest
     {
-        [Fact(Skip="not really important right now")]
+        [Fact]
         public void ProcessTheJsonDotNetDocs()
         {
             var directory = @"D:\Code\github\shiftkey\Newtonsoft.Json";
 
             var codeFolder = directory;
             var docsFolder = Path.Combine(directory, @"docs\");
-            var result = CodeImporter.Update(codeFolder, new[] { "*Tests.cs" }, docsFolder);
+            var result = CodeImporter.Update(codeFolder, new[] { ".*Documentation.*Tests[.]cs" }, docsFolder);
 
             Console.WriteLine("Completed: {0}", result.Completed);
             Console.WriteLine("Duration: {0}ms", result.ElapsedMilliseconds);
