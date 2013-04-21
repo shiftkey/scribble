@@ -4,7 +4,7 @@ function Get-ScriptDirectory
 	Split-Path $Invocation.MyCommand.Path
 }
 
-$Version = "0.4.2.999"
+$Version = "0.4.3.1000"
 
 powershell -File build.ps1 -Version $Version
 
@@ -13,4 +13,4 @@ $basePath = Join-Path (Get-ScriptDirectory) src\package
 
 $nuget = Join-Path (Get-ScriptDirectory) tools\NuGet.exe
 
-. $nuget pack $nuspec -BasePath $basePath -Version $Version -OutputDir D:\Code\packages\ -NoPackageAnalysis
+. $nuget pack $nuspec -BasePath $basePath -Version "$Version-pre" -OutputDir D:\Code\packages\ -NoPackageAnalysis
