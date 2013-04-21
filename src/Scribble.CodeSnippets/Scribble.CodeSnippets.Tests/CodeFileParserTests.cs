@@ -13,14 +13,14 @@ namespace Scribble.CodeSnippet.Tests
             var directory = @"data\get-code-snippets\".ToCurrentDirectory();
 
             var parser = new CodeFileParser(directory);
-            var actual = parser.Parse(f => f.EndsWith("code.cs"));
+            var actual = parser.Parse(new[] { ".*code[.]cs" });
 
             Assert.True(actual.Count > 1);
             Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
         }
 
         [Fact]
-        public void GetCodeSnippets_WhenPassingInARegex_ChoosesAllFiles()
+        public void GetCodeSnippets_ProvidingARegex_ChoosesAllFiles()
         {
             var directory = @"data\use-regexes\".ToCurrentDirectory();
 
@@ -31,7 +31,7 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
-        public void GetCodeSnippets_WhenPassingInARegexWithFolder_ChoosesOneFile()
+        public void GetCodeSnippets_ProvidingARegexWithFolder_ChoosesOneFile()
         {
             var directory = @"data\use-regexes\".ToCurrentDirectory();
 
@@ -48,7 +48,7 @@ namespace Scribble.CodeSnippet.Tests
             var directory = @"data\get-code-snippets\".ToCurrentDirectory();
             
             var parser = new CodeFileParser(directory);
-            var actual = parser.Parse(f => f.EndsWith("nested-code.cs"));
+            var actual = parser.Parse(new[] { ".*nested-code[.]cs" });
 
             Assert.Equal(2, actual.Count);
             Assert.True(actual.All(c => !string.IsNullOrWhiteSpace(c.Value)));
@@ -62,7 +62,7 @@ namespace Scribble.CodeSnippet.Tests
             var outputFile = Path.Combine(directory, @"output.md");
 
             var parser = new CodeFileParser(directory);
-            var snippets = parser.Parse(f => f.EndsWith("code.cs"));
+            var snippets = parser.Parse(new[] { ".*code[.]cs" });
 
             var result = DocumentFileProcessor.Apply(snippets, inputFile);
 

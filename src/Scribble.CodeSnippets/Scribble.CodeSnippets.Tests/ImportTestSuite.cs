@@ -15,7 +15,7 @@ namespace Scribble.CodeSnippet.Tests
         public void Scenario(string name, string folder, string inputFile, string expectedFile)
         {
             var parser = new CodeFileParser(folder);
-            var snippets = parser.Parse(f => f.EndsWith("code.cs"));
+            var snippets = parser.Parse(new[] { ".*code[.]cs" });
 
             var result = DocumentFileProcessor.Apply(snippets, inputFile);
 

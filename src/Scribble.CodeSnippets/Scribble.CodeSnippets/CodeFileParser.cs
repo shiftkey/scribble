@@ -53,6 +53,7 @@ namespace Scribble.CodeSnippets
             }
         }
 
+        [Obsolete("stand back, we're doing regexes")]
         public ICollection<CodeSnippet> Parse(Func<string, bool> isValidFile)
         {
             var codeFiles = Directory.GetFiles(codeFolder, "*.*", SearchOption.AllDirectories)
