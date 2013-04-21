@@ -1,3 +1,7 @@
+---
+layout: index
+---
+
 Scribble is a NuGet package to do the heavy lifting of creating and maintaining documentation in your projects.
 
 Specifically it is intended to:
