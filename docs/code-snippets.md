@@ -48,20 +48,22 @@ If you were doing something with XML-like syntax (HTML/XAML/XML/etc), we could s
 
 The syntax rules are:
 
- - No spaces in the key - use dashes if that's your thing
+ - No spaces for the key - use dashes if that's your thing
  - If there is a mismatch between start and end keys, or a key could not be found, you should get a build warning message. 
  - Nested keys could work, if you want to really drive me insane.
 
-After doing that, this is where the real goddamn cheating is, you write yourself a HTML comment in your Markdown file, like this: `<!-- code {key} -->`
+After doing that - and this is where the real goddamn cheating is - you write yourself a HTML comment in your Markdown file, like this: 
 
-Parsers which don't understand the tag will just pass it through as a comment tag, and Scribble needs to keep the placeholders around to keep code in sync.
+    <!-- code {key} -->
+
+Parsers which don't understand the tag will just pass it through as a comment tag, but Scribble will use this as a placeholder placeholder for the code snippet.
 
 On saving the file, Scribble will:
 
  - parse the MarkDown file and find the comment tag
- - attempt to find the value for `{key}` 
- - use the value in your file as a code snippet
+ - find the code snippet related to `{key}` 
+ - inser the code snippet contents after the comment tag
 
 So when you build the project, Scribble will insert the code (as a raw snippet) after the comment tag. If the file is unsaved (has modified changes), Scribble will wait until the file has changed before it performs the processing.
 
-If you want to leverage something like GitHub's syntax highlighting, you can add in an optional language after the key, like this: `<!-- code {key} csharp -->`.
+If you want to leverage something like GitHub's syntax highlighting, you can add in an optional language after the key, like this: `<!-- code {key} csharp -->`. But that's not currently supported.
