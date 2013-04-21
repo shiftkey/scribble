@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Scribble.CodeSnippets.Infrastructure;
 using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
@@ -13,7 +15,9 @@ namespace Scribble.CodeSnippets
             var result = new UpdateResult();
 
             var codeParser = new CodeFileParser(codeFolder);
-            var snippets = codeParser.Parse(extensionsToSearch);
+            ICollection<CodeSnippet> snippets;
+            using(TimingScope.Start("CodeParser.Parse"))
+                snippets = codeParser.Parse(extensionsToSearch);
 
             var incompleteSnippets = snippets.Where(s => string.IsNullOrWhiteSpace(s.Value)).ToArray();
             if (incompleteSnippets.Any())

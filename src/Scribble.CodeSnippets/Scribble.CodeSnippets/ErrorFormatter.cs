@@ -6,10 +6,10 @@ namespace Scribble.CodeSnippets
 {
     public class ErrorFormatter
     {
-        public static IEnumerable<ScribbleMessage> FormatIncomplete(CodeSnippet[] incompleteSnippets)
+        public static IEnumerable<ScribbleMessage> FormatIncomplete(IEnumerable<CodeSnippet> snippets)
         {
-            return incompleteSnippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
-                                     .Select(ToNotFoundMessage);
+            return snippets.Where(s => string.IsNullOrWhiteSpace(s.Value))
+                           .Select(ToNotFoundMessage);
         }
 
         static ScribbleMessage ToNotFoundMessage(CodeSnippet snippet)
@@ -22,9 +22,9 @@ namespace Scribble.CodeSnippets
             };
         }
 
-        public static IEnumerable<ScribbleMessage> FormatUnused(IEnumerable<CodeSnippet> codeSnippets)
+        public static IEnumerable<ScribbleMessage> FormatUnused(IEnumerable<CodeSnippet> snippets)
         {
-            return codeSnippets.Select(ToUnusedMessage);
+            return snippets.Select(ToUnusedMessage);
         }
 
         static ScribbleMessage ToUnusedMessage(CodeSnippet snippet)
@@ -37,9 +37,9 @@ namespace Scribble.CodeSnippets
             };
         }
 
-        public static IEnumerable<ScribbleMessage> FormatNotFound(List<CodeSnippetReference> codeSnippets)
+        public static IEnumerable<ScribbleMessage> FormatNotFound(List<CodeSnippetReference> snippets)
         {
-            return codeSnippets.Select(ToRequiredMessage);
+            return snippets.Select(ToRequiredMessage);
         }
 
         static ScribbleMessage ToRequiredMessage(CodeSnippetReference snippet)

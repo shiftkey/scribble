@@ -13,7 +13,6 @@ namespace Scribble.CodeSnippets
         const string StartRegex = @".*?start\s*code\s*(?<key>[A-Za-z-]*)(?<language>[A-Za-z]*).*?";
         const string EndRegex = @".*?end\s*code\s*(?<key>[A-Za-z-]*)";
         const RegexOptions Options = RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline;
-
         const string LineEnding = "\r\n";
 
         readonly string codeFolder;
@@ -25,32 +24,24 @@ namespace Scribble.CodeSnippets
 
         public ICollection<CodeSnippet> Parse(string[] filterOnExpression)
         {
-            try
+            var filesMatchingExtensions = new List<string>();
+
+            var allFiles = Directory.GetFiles(codeFolder, "*.*", SearchOption.AllDirectories);
+            foreach (var expression in filterOnExpression)
             {
-                var allFiles = Directory.GetFiles(codeFolder, "*.*", SearchOption.AllDirectories);
-
-                var filesMatchingRegex = new List<string>();
-
-                foreach (var regex in filterOnExpression)
+                try
                 {
-                    foreach (var f in allFiles)
-                    {
-                        if (Regex.IsMatch(f, regex))
-                        {
-                            filesMatchingRegex.Add(f);
-                        }
-                    }
+                    var regex = new Regex(expression);
+                    filesMatchingExtensions.AddRange(allFiles.Where(f => regex.IsMatch(f)));
                 }
+                catch (Exception)
+                {
+                    var files = Directory.GetFiles(codeFolder, expression, SearchOption.AllDirectories);
+                    filesMatchingExtensions.AddRange(files);
+                }
+            }
 
-                return GetCodeSnippets(filesMatchingRegex.Distinct());
-            }
-            catch (ArgumentException ex)
-            {
-                // right so someone is passing in a regex
-                var filesMatchingExtensions = filterOnExpression.SelectMany(
-                    extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories)).ToList();
-                return GetCodeSnippets(filesMatchingExtensions);
-            }
+            return GetCodeSnippets(filesMatchingExtensions.Distinct());
         }
 
         public static IList<CodeSnippet> GetCodeSnippets(IEnumerable<string> codeFiles)
