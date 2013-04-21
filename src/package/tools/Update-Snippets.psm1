@@ -3,16 +3,17 @@ param($rootDir, $toolsPath)
 function Update-Snippets {
 	param(
 		$Extensions = @("*.cs"),
-		[switch] $Debug
+		[switch] $Warnings,
+		[switch] $Trace
 	)
     
     $codeFolder = $rootDir
     $docsFolder = Join-Path $rootDir "docs"
 
+    Write-Host "Update started"
     $result = [Scribble.CodeSnippets.CodeImporter]::Update($codeFolder, $Extensions, $docsFolder)
-
 	$ticks = $result.ElapsedMilliseconds
-	Write-Host "Update took $ticks ms"
+	Write-Host "Completed in $ticks ms"
 
     if ($result.Completed -eq $false) {
     	Write-Error "Oops, something went wrong with the update"
@@ -26,7 +27,7 @@ function Update-Snippets {
     	Write-Error "File: $file - Line Number: $line"
     }
 
-    if ($Debug) {
+    if ($Warnings) {
 		foreach ($warning in $result.Warnings) {
 			$message = $warning.Message
 			$file = $warning.File
