@@ -81,6 +81,9 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     }
 }
 
+$assemblyPath = Join-Path $toolsPath "codesnippets\Scribble.CodeSnippets.dll"
+[void][Reflection.Assembly]::LoadFile($assemblyPath)  
+
 Import-Module (Join-Path $toolsPath Update-Snippets.psm1) -ArgumentList @($project_root, $toolsPath)
 Import-Module (Join-Path $toolsPath Start-Preview.psm1) -ArgumentList @($project_root, $docs_folder, $port)
 
