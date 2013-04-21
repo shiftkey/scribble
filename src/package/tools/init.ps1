@@ -81,6 +81,7 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
     }
 }
 
+Import-Module (Join-Path $toolsPath Update-Snippets.psm1) -ArgumentList @($project_root, $toolsPath)
 Import-Module (Join-Path $toolsPath Start-Preview.psm1) -ArgumentList @($project_root, $docs_folder, $port)
 
 if ($startBrowser) {
