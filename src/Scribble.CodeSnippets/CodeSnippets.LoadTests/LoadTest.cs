@@ -7,7 +7,7 @@ namespace CodeSnippets.LoadTests
 {
     public class LoadTest
     {
-        [Fact]
+        [Fact(Skip="no don't run this, build server!")]
         public void ProcessTheJsonDotNetDocs()
         {
             var directory = @"D:\Code\github\shiftkey\Newtonsoft.Json";
