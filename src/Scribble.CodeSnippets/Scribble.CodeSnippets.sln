@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets.Tests", "Scribble.CodeSnippets.Tests\CodeSnippets.Tests.csproj", "{57DB7A48-6056-411C-8468-E4FC02B3ABB0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BA9B311B-8119-4DB9-9B6F-5C50864185DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets", "Scribble.CodeSnippets\CodeSnippets.csproj", "{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets.LoadTests", "CodeSnippets.LoadTests\CodeSnippets.LoadTests.csproj", "{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{389A02DE-7E69-454E-95C4-0804A90DD239}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets", "Scribble.CodeSnippets\CodeSnippets.csproj", "{2F81FF57-F5ED-4AAE-B5C5-23F4B096B45D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippets.LoadTests", "CodeSnippets.LoadTests\CodeSnippets.LoadTests.csproj", "{9CE4C3FB-BB75-4169-B282-CCCCE3F9B901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
