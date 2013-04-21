@@ -155,3 +155,5 @@ packages
 CommonAssemblyInfo.cs
 
 src/package/tools/codesnippets/*
+
+*.DotSettings
