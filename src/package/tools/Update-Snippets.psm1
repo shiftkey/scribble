@@ -2,7 +2,7 @@ param($rootDir, $toolsPath)
 
 function Update-Snippets {
 	param(
-		$Extensions = @("*.cs"),
+		$Filter = @("*.cs"),
 		[switch] $Warnings,
 		[switch] $Trace
 	)
@@ -11,7 +11,7 @@ function Update-Snippets {
     $docsFolder = Join-Path $rootDir "docs"
 
     Write-Host "Update started"
-    $result = [Scribble.CodeSnippets.CodeImporter]::Update($codeFolder, $Extensions, $docsFolder)
+    $result = [Scribble.CodeSnippets.CodeImporter]::Update($codeFolder, $Filter, $docsFolder)
 	$ticks = $result.ElapsedMilliseconds
 	Write-Host "Completed in $ticks ms"
 
