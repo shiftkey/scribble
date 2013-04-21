@@ -20,6 +20,29 @@ namespace Scribble.CodeSnippet.Tests
         }
 
         [Fact]
+        public void GetCodeSnippets_WhenPassingInARegex_ChoosesAllFiles()
+        {
+            var directory = @"data\use-regexes\".ToCurrentDirectory();
+
+            var parser = new CodeFileParser(directory);
+            var actual = parser.Parse(new[] { "[.]cs" });
+
+            Assert.True(actual.Count == 2);
+        }
+
+        [Fact]
+        public void GetCodeSnippets_WhenPassingInARegexWithFolder_ChoosesOneFile()
+        {
+            var directory = @"data\use-regexes\".ToCurrentDirectory();
+
+            var parser = new CodeFileParser(directory);
+            var actual = parser.Parse(new[] { @".*want.*[.]cs" });
+
+            Assert.True(actual.Count == 1);
+        }
+
+
+        [Fact]
         public void GetCodeSnippets_WithNestedSnippets_ReturnsTwoValues()
         {
             var directory = @"data\get-code-snippets\".ToCurrentDirectory();

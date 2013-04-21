@@ -25,12 +25,32 @@ namespace Scribble.CodeSnippets
 
         public ICollection<CodeSnippet> Parse(string[] extensionsToSearch)
         {
-            var codeFiles = extensionsToSearch.SelectMany(
-                extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories));
+            try
+            {
+                var allFiles = Directory.GetFiles(codeFolder, "*.*", SearchOption.AllDirectories);
 
-            var snippets = GetCodeSnippets(codeFiles);
+                var filesMatchingRegex = new List<string>();
 
-            return snippets;
+                foreach (var regex in extensionsToSearch)
+                {
+                    foreach (var f in allFiles)
+                    {
+                        if (Regex.IsMatch(f, regex))
+                        {
+                            filesMatchingRegex.Add(f);
+                        }
+                    }
+                }
+
+                return GetCodeSnippets(filesMatchingRegex.Distinct());
+            }
+            catch (ArgumentException ex)
+            {
+                // right so someone is passing in a regex
+                var filesMatchingExtensions = extensionsToSearch.SelectMany(
+                    extension => Directory.GetFiles(codeFolder, extension, SearchOption.AllDirectories)).ToList();
+                return GetCodeSnippets(filesMatchingExtensions);
+            }
         }
 
         public ICollection<CodeSnippet> Parse(Func<string, bool> isValidFile)
