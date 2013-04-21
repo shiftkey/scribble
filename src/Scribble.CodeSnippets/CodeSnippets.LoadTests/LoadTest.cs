@@ -12,7 +12,7 @@ namespace CodeSnippets.LoadTests
         {
             var directory = @"D:\Code\github\shiftkey\Newtonsoft.Json";
 
-            var codeFolder = Path.Combine(directory, @"Src\");
+            var codeFolder = directory;
             var docsFolder = Path.Combine(directory, @"docs\");
             var result = CodeImporter.Update(codeFolder, new[] { "*Tests.cs" }, docsFolder);
 
