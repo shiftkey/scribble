@@ -2,6 +2,8 @@
 
 Now we get into the fun stuff.
 
+## Declaring a code snippet
+
 So, let's say you have a code snippet, like this:
 
     [Fact]
@@ -52,6 +54,8 @@ The syntax rules are:
  - If there is a mismatch between start and end keys, or a key could not be found, you should get a build warning message. 
  - Nested keys could work, if you want to really drive me insane.
 
+## Referencing a code snippet
+
 After doing that - and this is where the real goddamn cheating is - you write yourself a HTML comment in your Markdown file, like this: 
 
     <!-- code {key} -->
@@ -67,3 +71,19 @@ On saving the file, Scribble will:
 So when you build the project, Scribble will insert the code (as a raw snippet) after the comment tag. If the file is unsaved (has modified changes), Scribble will wait until the file has changed before it performs the processing.
 
 If you want to leverage something like GitHub's syntax highlighting, you can add in an optional language after the key, like this: `<!-- code {key} csharp -->`. But that's not currently supported.
+
+## Update-Snippets
+
+After doing those two steps, you can just run 
+
+    Update-Snippets
+
+from the Package Manager Console to scan and insert the code snippets. There's a number of flags which you can pass in to help speed things up (it's a brute force search by default).
+
+    Update-Snippets -Filter "*Tests.cs"
+
+    Update-Snippets -Filter ".*folder-name.*[.]cs"
+
+    Update-Snippets -Warn
+
+    Update-Snippets -Trace
