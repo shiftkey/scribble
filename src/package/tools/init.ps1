@@ -44,11 +44,14 @@ if ($config_exists -eq $false) {
     $properties.Add('port',$port)
     ConvertTo-Json $properties | Out-File $configFile
 
-    # TODO: overwrite template references to localhost:????? to localhost:40000
+    # open the file in Visual Studio
+    $index_file = Join-Path -Path $docs_folder "index.md"
 
-	# open the file in Visual Studio
-    $index = Join-Path -Path $docs_folder "index.md"
-	$dte.ItemOperations.OpenFile($index)
+    # update template references based on dynamic port
+    $template = Get-Content $index_file
+    $template -replace "localhost:XXXXX", "localhost:$port" | out-file $index_file
+
+	$dte.ItemOperations.OpenFile($index_file)
 
     $startBrowser = $true
 

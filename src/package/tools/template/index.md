@@ -21,7 +21,7 @@ Specifically it is designed to:
 
 This is a template which has been added to the `docs` folder by Scribble after installing the package. 
 
-Scribble will let you preview this at any time by pointing your browser at [localhost:40000](http://localhost:40000/).
+Scribble will let you preview this at any time by pointing your browser at [localhost:XXXXX](http://localhost:XXXXX/).
 
 Feel free to edit this file to your heart's content (and check it into source control) so that you too can start writing documentation for this project.
 
