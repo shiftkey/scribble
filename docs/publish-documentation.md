@@ -6,8 +6,9 @@ What sort of publishing?
 
  - GitHub Pages - switch to gh-pages branch, replace content with generated HTML/CSS/JS, commit, push
  - Heroku - raw publishing to Heroku
+ - WebDeploy - allows for syncing of content with an external server - requires config, permissions etc
  - FTP - replace content with generated HTML/CSS/JS (requires config, permissions, etc)
- - Zip - export the generated content to some location
+ - Zip - export the generated content to a specific file
  
 What other platforms are of interest to you?
 
@@ -54,3 +55,6 @@ This could be a simpler workflow than the above:
  - commit it to a specific branch (convention: name it `jekyll`)
  - `git push heroku jekyll`
 
+## FTP
+
+## WebDeploy
