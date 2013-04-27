@@ -16,9 +16,9 @@ $groups = ([regex]"\d+").matches($lastPackage).groups
 $build_number = $groups[-1].value
 $new_build_number = 1 + [int]$build_number
 
-$Version = $lastPackage -replace $build_number, $new_build_number
-$Version = $Version -replace "scribble.", ""
-$Version = $Version -replace "-pre.nupkg", ""
+$Version = $lastPackage -replace $build_number, $new_build_number `
+					    -replace "scribble.", "" `
+					    -replace "-pre.nupkg", ""
 "Using new version number $Version"
 
 powershell -File build.ps1 -Version $Version
