@@ -18,8 +18,11 @@ $version = $package.ToString()
 
 $startBrowser = $false
 
+$directory_exists = [IO.Directory]::Exists($docs_folder)
+$config_exists = [IO.File]::Exists($configFile)
+
 # if this is the first time we run the package
-if ([IO.Directory]::Exists($docs_folder) -eq $false) {
+if ($config_exists -eq $false) {
 
     Write-Host "Adding docs folder into folder $project_root"
     Setup-FolderStructure
@@ -28,7 +31,9 @@ if ([IO.Directory]::Exists($docs_folder) -eq $false) {
 	$templatePath = Join-Path -Path $toolsPath "template\*"
 
 	# populate folder with template contents
-    New-Item -ItemType directory -Path $docs_folder
+    if ($directory_exists -eq $false) {
+        New-Item -ItemType directory -Path $docs_folder
+    }
 	Copy-Item -Path $templatePath -Destination $docs_folder -Recurse | Out-Null
 
     $port = Get-Random -Minimum 30000 -Maximum 50000
