@@ -1,6 +1,6 @@
 # [Proposal] Publish Documentation
 
-It should be really easy to take your Markdown files and publish them somewhere
+It should be really easy to take your Markdown files and publish them somewhere.
 
 What sort of publishing?
 
@@ -15,6 +15,10 @@ What other platforms are of interest to you?
 ## GitHub Pages
 
 Dependency: git
+Configuration: 
+ - remote git repository to push code to
+ - HTTP: username/password permissions to repository (we don't want this in source control)
+ - SSH: key (this won't be in source control either)
 
 So I just spiked this pseduo-script together (the git bits work, the rest I'm less sure of).
 
@@ -48,6 +52,10 @@ TODO: make git.exe available within tools and ensure dev does not need to have i
 ## Heroku  
 
 Dependency: git
+Configuration: 
+ - remote git repository to push code to
+ - HTTP: username/password permissions to repository (we don't want this in source control)
+ - SSH: key (this won't be in source control either
 
 This could be a simpler workflow than the above:
 
@@ -55,6 +63,23 @@ This could be a simpler workflow than the above:
  - commit it to a specific branch (convention: name it `jekyll`)
  - `git push heroku jekyll`
 
+## WebDeploy (MSDeploy)
+
+Dependency: MSDeploy client (licensing question: am I allowed to ship these binaries?)
+
+Configuration: 
+ - remote URL to send content to
+ - username/password permissions to send files (we don't want this in source control)
+
+TODO: sketch out API calls which would be necessary to authenitcate and publish folder containing site content
+
+TODO: do we need/want to handle the first-time initialization of a site? is that even possible?
+
 ## FTP
 
-## WebDeploy
+Dependency: command-line FTP client (no preference, but Windows ships with [one](http://www.nsftools.com/tips/MSFTP.htm))
+
+Configuration: 
+ - remote URL to send content to
+ - username/password permissions to send files (we don't want this in source control)
+
