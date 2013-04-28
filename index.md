@@ -2,6 +2,10 @@
 layout: index
 ---
 
+{{ site.baseurl }}
+
+{{ site.url }}
+
 No-one likes writing documentation because it's not fun. 
 
 This is the problem Scribble is looking to solve.
@@ -14,7 +18,7 @@ Pre-release packages are available on NuGet. If you're feeling bold, go try them
   <p><code>PM&gt; Install-Package scribble -Pre</code></p>
 </div>
 
-and then follow the [Getting Started](/pages/getting-started.html) guide.
+and then follow the [Getting Started]({{ site.baseurl }}/pages/getting-started.html) guide.
 
 ### Why should I care?
 
