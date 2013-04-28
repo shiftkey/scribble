@@ -1,4 +1,8 @@
-# [Proposal] Publish Documentation
+---
+layout: page
+---   
+
+## [Proposal] Publish Documentation
 
 It should be really easy to take your Markdown files and publish them somewhere.
 
@@ -12,7 +16,7 @@ What sort of publishing?
  
 What other platforms are of interest to you?
 
-## GitHub Pages
+### GitHub Pages
 
 Dependency: git
 Configuration: 
@@ -49,7 +53,7 @@ TODO: make git.exe available within tools and ensure dev does not need to have i
 	cd ..
 	rm -rf temp
 
-## Heroku  
+### Heroku  
 
 Dependency: git
 Configuration: 
@@ -63,7 +67,7 @@ This could be a simpler workflow than the above:
  - commit it to a specific branch (convention: name it `jekyll`)
  - `git push heroku jekyll`
 
-## WebDeploy (MSDeploy)
+### WebDeploy (MSDeploy)
 
 Dependency: MSDeploy client (licensing question: am I allowed to ship these binaries?)
 
@@ -75,7 +79,7 @@ TODO: sketch out API calls which would be necessary to authenitcate and publish 
 
 TODO: do we need/want to handle the first-time initialization of a site? is that even possible?
 
-## FTP
+### FTP
 
 Dependency: command-line FTP client (no preference, but Windows ships with [one](http://www.nsftools.com/tips/MSFTP.htm))
 

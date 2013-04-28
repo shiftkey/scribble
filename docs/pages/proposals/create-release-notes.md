@@ -1,6 +1,10 @@
-# [Proposal] Create Release Notes
+---
+layout: page
+---   
 
-## Workflow
+## [Proposal] Create Release Notes
+
+### Workflow
 
 To make it easy to document as you develop, why not support a workflow that makes it easy to capture release notes?
 
@@ -16,21 +20,17 @@ scribble start major
 
 If you're doing something smaller, these are all equivalent:
 
-```
-scribble start bugfix
-scribble start minor
-scribble start feature
-scribble start task
-```
+    scribble start bugfix
+    scribble start minor
+    scribble start feature
+    scribble start task
 
 If you want to do a pre-release version, any of these things will work:
 
-```
-scribble start preview
-scribble start pre
-```
+    scribble start preview
+    scribble start pre
 
-#### What happens next
+### What happens next
 
 So rather than worrying about "ensuring you're doing semver right", why not leave it up to the underlying framework?
 
@@ -47,7 +47,7 @@ TODO:
  - need to do opinionated integration with .gitignore/.hgignore files
  - needs to work outside of VS (guess this means build targets uuuugh)
 
-#### Versioning
+### Versioning
 
 The version it chooses will be based on some conventions:
 

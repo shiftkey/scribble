@@ -1,4 +1,8 @@
-# [Proposal] Add a new page
+---
+layout: page
+---   
+
+### [Proposal] Add a new page
 
 Once you've created your docs folder, you can start creating new pages for your documentation.
 
@@ -11,7 +15,7 @@ If the file already exists on disk, the user should
 
 It should open the new file inside Visual Studio, which is pre-populated from a predefined layout and content.
 
-# [Proposal] Editing existing pages
+### [Proposal] Editing existing pages
 
 If you want to edit a page, don't bother with going to Explorer, just start typing...
 
@@ -20,7 +24,7 @@ If you want to edit a page, don't bother with going to Explorer, just start typi
 
 We should use Powershell's autocomplete hooks and serve up a list of files which exist on disk.
 
-# [Proposal] Delete unneeded pages
+### [Proposal] Delete unneeded pages
 
 And when a page has reached the end of it's useful life, just drop it.
 

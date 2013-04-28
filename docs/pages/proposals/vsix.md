@@ -1,4 +1,8 @@
-# [Proposal] Visual Studio Integration (VSIX)
+---
+layout: page
+---   
+
+## [Proposal] Visual Studio Integration (VSIX)
 
 Why?
 

@@ -1,4 +1,8 @@
-# [Proposal] Configuration
+---
+layout: page
+---   
+
+## [Proposal] Configuration
 
 It'd be great if you could set configurations to your scribble.json file which will you could then check into source control and NEVER HAVE TO WORRY ABOUT THEM AGAIN.
 
