@@ -2,9 +2,9 @@
 layout: index
 ---
 
-{{ site.baseurl }}
+Base URL: {{ site.baseurl }}
 
-{{ site.url }}
+Site URL: {{ site.url }}
 
 No-one likes writing documentation because it's not fun. 
 
