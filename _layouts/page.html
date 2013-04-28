@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>scribble</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		{% include resources.html %}
+	</head>
+	<body class="left-sidebar">
+		<div id="wrapper">
+			<div id="content" class="mobileUI-main-content">
+				<div id="content-inner">
+					<article class="is-post is-post-excerpt">
+						{{ content }}
+					</article>
+				</div>
+			</div>
+			<div id="sidebar">
+				{% include menu.html %}
+				{% include recent.html %}
+				{% include copyright.html %}
+			</div>
+		</div>
+	</body>
+</html>
