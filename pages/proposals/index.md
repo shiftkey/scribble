@@ -22,19 +22,19 @@ These features are not listed based on priority - however a more clearly-defined
 
 ### Editing Pages from the Console
 
- - **What?**
- - **Why?**
+ - **What?** Shortcuts for creating/opening/deleting files for those who like to be in VS.
+ - **Why?** Leverage templates and quickly scaffolding a site up
  - [Read more](/scribble/pages/proposals/editing-pages.html)
 
 ### Publishing Documentation
 
- - **What?**
- - **Why?**
+ - **What?** Exporting your generated documentation to other systems
+ - **Why?** Because pretty docs are awesome
  - [Read more](/scribble/pages/proposals/publishing-documentation.html)
 
 ### Visual Studio Extension
 
- - **What?**
- - **Why?**
+ - **What?** To complement the NuGet tools, we could build in better integration with the Visual Studio build system and IDE
+ - **Why?** Better automation and polish on top of the core system
  - [Read more](/scribble/pages/proposals/vsix.html)
 
