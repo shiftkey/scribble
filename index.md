@@ -2,10 +2,6 @@
 layout: index
 ---
 
-Base URL: {{ site.baseurl }}
-
-Site URL: {{ site.url }}
-
 No-one likes writing documentation because it's not fun. 
 
 This is the problem Scribble is looking to solve.
