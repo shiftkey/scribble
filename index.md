@@ -2,40 +2,43 @@
 layout: index
 ---
 
-Scribble is a NuGet package to do the heavy lifting of creating and maintaining documentation in your projects.
+No-one likes writing documentation because it's not fun. 
 
-Specifically it is intended to:
+This is the problem Scribble is looking to solve.
 
- - make documentation easy and fun to write
- - keep code and documentation in sync
- - take your documentation and export it
+### I want to try it out!
 
-### Impatient? Go try it out!
-
-**Note:** This is still a pre-release package. While I am still working on core components it may drown kittens. Approach with caution. Feedback is still welcome.
+Pre-release packages are available on NuGet. If you're feeling bold, go try them out!
 
 <div class="nuget-badge">
   <p><code>PM&gt; Install-Package scribble -Pre</code></p>
 </div>
 
-### Getting Started in 3 easy steps
+and then follow the [Getting Started](/pages/getting-started.html) guide.
 
- - Open your project in Visual Studio
- - Install the package from the Package Manager Console
- - There is no step 3
+### Why should I care?
 
-As part of the installation, Scribble will create the folder structure under `docs` at the root of your project (or repository if it can find a git/hg repository)
+#### If you don't want to use [insert terrible syntax]
 
-![files created](/scribble/images/folder-structure.png)
+The more you have to fight with the tool or framework, the easier it is to neglect documentation - which leads to atrophy and the existing documentation losing it's value.
 
-Scribble will also open the Markdown template for the index so you can start editing quickly
+Plus XML is almost certainly terrible for humans.
 
-![edit the file](/scribble/images/edit-file.png)
+Scribble uses Markdown at it's core. If you've never heard of Markdown, it's a lightweight markup syntax for turning text into HTML. It's been used in question-and-answer sites like StackOverflow, various blogging engines and sites, and other place too I'll bet.
 
-In the background Scribble will open a tiny webserver to transform the Markdown files and other files into a website which you can view immediately in the browser
+It's easy to learn and has a feature set which fits with what developers need to describe their software, so it's a great match for what Scribble needs.
 
-![preview the file](/scribble/images/view-site.png)
+#### If you want to include code snippets automagically
 
-### What else is there?
+Yes! Using code to demonstrate your features is excellent, but you want to use your real code - not some copy-paste effort which means you'll have to edit it again later.
 
-Check the [docs folder](https://github.com/shiftkey/scribble/tree/master/docs/) for details about the concepts and ideas.
+#### If you want to quickly and easily publish your documentation
+
+Most people associate documentation for .NET projects as:
+
+ - XML documentation
+ - CHM files created from XML documentation
+
+Scribble is not looking to go down this path, but is instead looking to borrow ideas from static site generators to make the outputs more interesting and valuable.
+
+In fact, *the documentation for Scribble itself has been created using Scribble*.
