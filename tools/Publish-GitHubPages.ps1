@@ -43,5 +43,6 @@ function Update-GithubPages($current_repository, $base_url) {
 Update-GithubPages "D:\Code\github\shiftkey\scribble\" "/scribble/"
 
 if ($PushToRemote) { 
+	"Pushing to GitHub now"
     . git push origin gh-pages --force
 }
