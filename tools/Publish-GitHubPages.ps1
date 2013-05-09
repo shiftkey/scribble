@@ -1,7 +1,7 @@
 param([switch]$PushToRemote)
 
 
-function Update-GithubPages($current_repository, $base_url, $remote_url) {
+function Update-GithubPages($current_repository, $base_url) {
 
 	$currentLocation = (Get-Location)
 
@@ -17,7 +17,7 @@ function Update-GithubPages($current_repository, $base_url, $remote_url) {
 
 	Set-Location -Path $repoPath
 
-	git clone -b gh-pages -o upstream $current_repository .
+	. git clone -b gh-pages -o upstream $current_repository . | Out-Null
 
 	"Replacing contents with generated content"
 
@@ -27,21 +27,21 @@ function Update-GithubPages($current_repository, $base_url, $remote_url) {
 
     # update template references to GitHub URL
     $template = Get-Content "_config.yml"
-    $template -replace "baseurl: /", "baseurl: $base_url" | out-file "_config.yml"
+    $template -replace "baseurl: /", "baseurl: $base_url" | Out-File "_config.yml" -encoding "ASCII"
 
-	. git add .
-	. git add -u .
-	. git commit -m "updating site from scribble generated content"
-	. git push upstream gh-pages
+	. git add . | Out-Null
+	. git add -u . | Out-Null
+	. git commit -m "updating site from scribble generated content" | Out-Null
+	. git push upstream gh-pages | Out-Null
 
 	Set-Location -Path $currentLocation
 
 	"Removing temporary folder at $repoPath"
-	Remove-Item $repoPath -Recurse -Force
+	Remove-Item $repoPath -Recurse -Force | Out-Null
 }
 
-Update-GithubPages "D:\Code\github\shiftkey\scribble\" "/scribble" "http://shiftkey.github.io/scribble/"
+Update-GithubPages "D:\Code\github\shiftkey\scribble\" "/scribble/"
 
 if ($PushToRemote) { 
-    . git push origin gh-pages
+    . git push origin gh-pages --force
 }
