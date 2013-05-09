@@ -12,13 +12,13 @@ These features are not listed based on priority - however a more clearly-defined
 
  - **What?** Being able to configure your environment rather than having to remember to provide the same arguments each time you call specific function
  - **Why?** Because humans are forgetful and automation is awesome
- - [Read more](/scribble/pages/proposals/configuration.html)
+ - [Read more]({{site.baseurl}}pages/proposals/configuration.html)
 
 ### Editing Pages from the Console
 
  - **What?** Shortcuts for creating/opening/deleting files for those who like to be in VS.
  - **Why?** Leverage templates and quickly scaffolding a site up
- - [Read more](/scribble/pages/proposals/editing-pages.html)
+ - [Read more]({{site.baseurl}}pages/proposals/editing-pages.html)
 
 ### Publishing Documentation
 
