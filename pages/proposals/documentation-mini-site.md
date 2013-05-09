@@ -2,7 +2,7 @@
 layout: page
 ---   
 
-## [Proposal] API Documentation Part A - Create Mini-Site
+## [Proposal] Create Mini-Site for API Documentation
 
 This is an open-ended discussion I've been having with a few people, but I'm almost at the point where I want to start developing these features so I'm going to elaborate first on the path I intend to take
 
