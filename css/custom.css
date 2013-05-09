@@ -37,9 +37,9 @@ pre code {
 }
 
 .is-post h2 span:before {
-    content: [;
+    content: "[";
 }
 
 .is-post h2 span:after {
- content: ];   
+ content: "]";   
 }
