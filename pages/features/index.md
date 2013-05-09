@@ -12,15 +12,15 @@ With your documentation in source control as Markdown files, you can browse thes
 
 To start the pretzel webserver (which handles tranforming files as well as serving content) just run `Start-Preview` from the Package Manager Console.
 
-![preview the file](/scribble/images/introduction/view-site.png)
+![preview the file]({{site.baseurl}}images/introduction/view-site.png)
 
-For more details read the [Preview Documentation](/scribble/pages/features/preview-documentation.html) section.
+For more details read the [Preview Documentation]({{site.baseurl}}pages/features/preview-documentation.html) section.
 
 ### Jekyll Compatibility
 
 If you've ever used [Jekyll](http://jekyllrb.com/), the way files are organised inside the Scribble docs folder should be familiar to you.
 
-If you're not familiar with it, [this](/scribble/pages/features/folder-structure.html) should be a good introduction to it.
+If you're not familiar with it, [this]({{site.baseurl}}pages/features/folder-structure.html) should be a good introduction to it.
 
 ### Add Code Snippets
 
@@ -39,4 +39,4 @@ One of the first features underway (that I wanted from Sandcastle) is supporting
 
 This eliminates the need to manually edit code samples as the underlying code and APIs change.
 
-For more details read the [Code Snippets](/scribble/pages/features/code-snippets.html) section.
+For more details read the [Code Snippets]({{site.baseurl}}pages/features/code-snippets.html) section.
