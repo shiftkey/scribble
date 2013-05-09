@@ -29,8 +29,17 @@ pre, code {
     font-family: 'Cutive Mono', serif;
     margin-bottom: 1em;
     font-weight: 700;
+    white-space: normal;
 }
 
 pre code {
     line-height: 1em;
+}
+
+.is-post h2 span:before {
+    content: "[";
+}
+
+.is-post h2 span:after {
+ content: "]";   
 }

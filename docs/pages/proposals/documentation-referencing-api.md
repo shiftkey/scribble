@@ -2,7 +2,7 @@
 layout: page
 ---   
 
-## [Proposal] API Documentation Part B - Referencing API Documentation inside Scribble
+## [Proposal] Linking to API Documentation
 
 So if we have our mini-site working as per the spec in Part A, how can we link to generated pages inside code? This is a tricky problem for several reasons:
 
@@ -63,4 +63,3 @@ For each of these tags, if it's text matches a key in it's collection, the scrip
 ### Linking Code in other formats
 
 While that might sound like a lot, it's barely the tip of the iceberg with what we might be able to support with assocating content together.
-
