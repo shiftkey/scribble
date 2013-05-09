@@ -2,11 +2,11 @@
 layout: page
 ---   
 
-# [Proposal] API Documentation Part A - Create Mini-Site
+## [Proposal] API Documentation Part A - Create Mini-Site
 
 This is an open-ended discussion I've been having with a few people, but I'm almost at the point where I want to start developing these features so I'm going to elaborate first on the path I intend to take
 
-## Why?
+### Why?
 
 Part of any good library or piece of software is presenting it's API surface in an easy-to-navigate way. In many .NET projects this comes down to two things:
 
@@ -15,20 +15,18 @@ Part of any good library or piece of software is presenting it's API surface in 
 
 If you've never seen XML documentation before, this is an example:
 
-```
-/// <summary>
-///  This class performs an important function.
-/// </summary>
-public class MyClass{}
-```
+    /// <summary>
+    ///  This class performs an important function.
+    /// </summary>
+    public class MyClass{}
 
 Fortunately I don't have to worry about the first feature, as that's taken care of by the people creating the library (they annotate their code) or by Visual Studio (they parse the generated XML). However that second task is something I will need to resolve as people continue to ask for it.
 
-## Why MSDN-style documentation sucks
+### Why MSDN-style documentation sucks
 
 A quick note on why I continute to stall on implementing this:
 
-### The value provided by this (ignoring Intellisense) is debatable
+#### The value provided by this (ignoring Intellisense) is debatable
 
 Pop quiz: what does this property do?
 
@@ -45,17 +43,17 @@ That's right, it's just a plain old-fashioned property. So why even document it?
  - because tools like FxCop can be configured to *demand* comments in a certain format ('properties must start with a "Gets or sets" summary')...
  - because consumers *demand* XML documentation whenever they download a library, no matter how trivial some features might be...
 
-### Reinventing the wheel (this time around) is not fun
+#### Reinventing the wheel (this time around) is not fun
 
 One of the inspirations for this project was to go in a radically-different approach to what MSDN has done with documentation. I wanted to start from a blank slate, not from an XML file, and see what results.
 
-### There's probably some other things but I'm getting sidetracked
+#### There's probably some other things but I'm getting sidetracked
 
 
 
-## Walkthrough the feature
+### Walkthrough the feature
 
-### Getting Started
+#### Getting Started
 
 So let's say we had installed Scribble but wanted to create a mini-site which was a simple way to 
 navigate the API?
@@ -83,7 +81,7 @@ These files will be editable by the user, so they can organise the data in whate
 TODO: outline what the model and it's properties will look like, as this will impact template options
 TODO: what if we want to include page-specific data? Where will that live?
 
-### Generating the mini-site
+#### Generating the mini-site
 
 So we have our templates ready and our XML documentation handy, so we run
 

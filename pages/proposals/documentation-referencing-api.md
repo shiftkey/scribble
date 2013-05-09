@@ -2,7 +2,7 @@
 layout: page
 ---   
 
-# [Proposal] API Documentation Part B - Referencing API Documentation inside Scribble
+## [Proposal] API Documentation Part B - Referencing API Documentation inside Scribble
 
 So if we have our mini-site working as per the spec in Part A, how can we link to generated pages inside code? This is a tricky problem for several reasons:
 
@@ -10,23 +10,17 @@ So if we have our mini-site working as per the spec in Part A, how can we link t
  - references should not be hard-coded (as my local environment will be different to deploying to github-pages, for example)
  - TODO: other reasons
 
-## Some inspiration from Sandcastle
+### Some inspiration from Sandcastle
 
 So Sandcastle has this neat feature called CodeReferences which are specific XML tags to point to members (class, method, whatever) inside XML documentation. Here's an example:
 
-```
-The simplest way to check if JSON is valid is to load the JSON into a JObject or JArray and then
-use the <codeEntityReference>M:Newtonsoft.Json.Schema.Extensions.IsValid(Newtonsoft.Json.Linq.JToken,Newtonsoft.Json.Schema.JsonSchema)</codeEntityReference> method with the JSON Schema.
-```
+    The simplest way to check if JSON is valid is to load the JSON into a JObject or JArray and then use the <codeEntityReference>M:Newtonsoft.Json.Schema.Extensions.IsValid(Newtonsoft.Json.Linq.JToken,Newtonsoft.Json.Schema.JsonSchema)</codeEntityReference> method with the JSON Schema.
 
 But that's awful. Just horrible. 
 
 I'd rather do something like this:
 
-```
-The simplest way to check if JSON is valid is to load the JSON into a JObject or JArray and then
-use the `Extensions.IsValid(jToken,jsonSchema)` method with the JSON Schema.
-```
+    The simplest way to check if JSON is valid is to load the JSON into a JObject or JArray and then use the `Extensions.IsValid(jToken,jsonSchema)` method with the JSON Schema.
 
 Notice the differences?
 
@@ -56,10 +50,9 @@ As part of the `Update-APIDocs` step, the XML documentation is transformed into 
 
 #### Load Resource
 
- - a small piece of JavaScript is written and linked in the footer of all the API documentation pages
- - when the user navigates to a page, in the background it fetches the `references.json` file  
+A small piece of JavaScript is written to do this task and the templates link to this file in the footer of the documentation page. When the page loads, the script the fetches the `references.json` file in the background.
 
- TODO: is there a reliable, cross-platform way to cache this data for a period of time? AppCache?
+TODO: is there a reliable, cross-platform way to cache this data for a period of time? AppCache?
 
 #### Enhance Document
 
