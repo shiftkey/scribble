@@ -8,13 +8,13 @@ It'd be great if you could set configurations to your scribble.json file which w
 
 Something like this:
 
-`Configure-Scribble "key" "value"`
+    Configure-Scribble "key" "value"
 
 How would you discover what values are present?
 
-`Configure-Scribble`
-`Configure-Scribble -List`
+    Configure-Scribble
+    Configure-Scribble -List
 
 I've broken something. How do I reset it?
 
-`Configure-Scribble -Reset`
+    Configure-Scribble -Reset

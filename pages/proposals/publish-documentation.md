@@ -24,34 +24,17 @@ Configuration:
  - HTTP: username/password permissions to repository (we don't want this in source control)
  - SSH: key (this won't be in source control either)
 
-So I just spiked this pseduo-script together (the git bits work, the rest I'm less sure of).
+So at any point in time you can run:
 
-NOTE: assumes git is installed on the dev's machine and is in the PATH
-TODO: make git.exe available within tools and ensure dev does not need to have in PATH
+    Publish-GitHubPages
 
-	mkdir temp && cd temp
-	# create a stub repo
-	git init
-	# we could use the local repo here
-	git remote add upstream https://github.com/shiftkey/scribble.git    
-	# just fetch changes for one branch
-	git fetch upstream +gh-pages
-	# switch to that branch
-	git checkout gh-pages
-	# clobber it all
-	rm -rf .
-	# dump in new site contents
-	cp ../_site/ . -r
-	# add all the things
-	git add .
-	git add -u .
-	# new commit
-	git commit -m "updated site"
-	# to infinity and beyond
-	git push upstream gh-pages
-	# tidy up
-	cd ..
-	rm -rf temp
+Which will...
+
+ - create a temporary clone of the repository (aiming to do *just* the gh-pages branch)
+ - overwrite the `gh-pages` branch with the contents of the `docs` folder
+ - change some config values based on how the site will be deployed
+ - commit and push the changes back to your local clone
+ - (optional) push the changes straight to GitHub
 
 ### Heroku  
 
