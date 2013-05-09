@@ -30,7 +30,7 @@ These features are not listed based on priority - however a more clearly-defined
 
  - **What?** Being able to provide a easy-to-navigate representation of your project's API surface
  - **Why?** Because to many this is the classic way of understanding a project
- - Read more: [API Documentation Mini-Site](/scribble/pages/proposals/documentation-mini-site.html) and [Referencing APIs](/scribble/pages/proposals/documentation-referencing-apis.html)
+ - Read more: [API Documentation Mini-Site](/scribble/pages/proposals/documentation-mini-site.html) and [Referencing your API](/scribble/pages/proposals/documentation-referencing-api.html)
 
 ### Create Release Notes
 
