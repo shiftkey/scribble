@@ -14,12 +14,6 @@ These features are not listed based on priority - however a more clearly-defined
  - **Why?** Because humans are forgetful and automation is awesome
  - [Read more](/scribble/pages/proposals/configuration.html)
 
-### Create Release Notes
-
- - **What?** Using scribble as a tool for managing release notes using the [Semantic Release Notes](http://semanticreleasenotes.org/) specification
- - **Why?** Scribble could support workflows to make things easier for developers
- - [Read more](/scribble/pages/proposals/create-release-notes.html)
-
 ### Editing Pages from the Console
 
  - **What?** Shortcuts for creating/opening/deleting files for those who like to be in VS.
@@ -31,6 +25,18 @@ These features are not listed based on priority - however a more clearly-defined
  - **What?** Exporting your generated documentation to other systems
  - **Why?** Because pretty docs are awesome
  - [Read more](/scribble/pages/proposals/publishing-documentation.html)
+
+### API Documentation
+
+ - **What?** Being able to provide a easy-to-navigate representation of your project's API surface
+ - **Why?** Because to many this is the classic way of understanding a project
+ - Read more: [API Documentation Mini-Site](/scribble/pages/proposals/documentation-mini-site.html) and [Referencing APIs](/scribble/pages/proposals/documentation-referencing-apis.html)
+
+### Create Release Notes
+
+ - **What?** Using scribble as a tool for managing release notes using the [Semantic Release Notes](http://semanticreleasenotes.org/) specification
+ - **Why?** Scribble could support workflows to make things easier for developers
+ - [Read more](/scribble/pages/proposals/create-release-notes.html)
 
 ### Visual Studio Extension
 
