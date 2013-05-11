@@ -30,12 +30,11 @@ A quick note on why I continute to stall on implementing this:
 
 Pop quiz: what does this property do?
 
-```
-/// <summary>
-/// Gets or sets the value for BlahBlah
-/// </summary>
-public int BlahBlah { get; set; }
-```
+
+    /// <summary>
+    /// Gets or sets the value for BlahBlah
+    /// </summary>
+    public int BlahBlah { get; set; }
 
 That's right, it's just a plain old-fashioned property. So why even document it?
 
