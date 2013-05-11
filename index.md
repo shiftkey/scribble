@@ -18,21 +18,21 @@ and then follow the [Getting Started](/scribble/pages/getting-started.html) guid
 
 ### Why should I care?
 
-#### If you don't want to use [insert terrible syntax]
+#### Don't want to use "insert terrible syntax here"?
 
-The more you have to fight with the tool or framework, the easier it is to neglect documentation - which leads to atrophy and the existing documentation losing it's value.
+Scribble uses [Markdown](http://daringfireball.net/projects/markdown/) at it's core. If you've never heard of Markdown, it's a lightweight markup syntax for turning text into HTML. 
 
-Plus XML is almost certainly terrible for humans.
-
-Scribble uses Markdown at it's core. If you've never heard of Markdown, it's a lightweight markup syntax for turning text into HTML. It's been used in question-and-answer sites like StackOverflow, various blogging engines and sites, and other place too I'll bet.
+It's been used in question-and-answer sites like StackOverflow, various blogging engines and sites, and other place too I'll bet. 
 
 It's easy to learn and has a feature set which fits with what developers need to describe their software, so it's a great match for what Scribble needs.
 
-#### If you want to include code snippets automagically
+#### Want to include real code snippets?
 
-Yes! Using code to demonstrate your features is excellent, but you want to use your real code - not some copy-paste effort which means you'll have to edit it again later.
+Yes! Using code to demonstrate your features is excellent, but you'll probably want to use real code.
 
-#### If you want to quickly and easily publish your documentation
+It just requires a bit of annotating and some commands (at the moment), but this let's you start referencing real code in your documentation without worrying about future API changes being forgotten in your documentation.
+
+#### Want to quickly and easily publish?
 
 Most people associate documentation for .NET projects as:
 
