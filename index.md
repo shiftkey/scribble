@@ -40,5 +40,3 @@ Most people associate documentation for .NET projects as:
  - CHM files created from XML documentation
 
 Scribble is not looking to go down this path, but is instead looking to borrow ideas from static site generators to make the outputs more interesting and valuable.
-
-In fact, *the documentation for Scribble itself has been created using Scribble*.
