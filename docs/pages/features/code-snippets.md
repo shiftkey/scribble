@@ -86,9 +86,9 @@ After doing those two steps, you can just run
 from the Package Manager Console to scan and insert the code snippets. There's a number of flags which you can pass in to help speed things up (it's a brute force search by default).
 
     Update-Snippets -Filter "*Tests.cs"
-
     Update-Snippets -Filter ".*folder-name.*[.]cs"
 
-    Update-Snippets -Warn
+If you want some more tracing information about what is going on under the hood, these parameters are also available:
 
+    Update-Snippets -Warn
     Update-Snippets -Trace
