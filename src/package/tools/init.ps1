@@ -10,6 +10,9 @@ function Upgrade-FolderStructure {
     Write-Debug "Existing documentation folder already found"
 }
 
+$assemblyPath = Join-Path $toolsPath "_libgit2sharp\LibGit2Sharp.dll"
+[void][Reflection.Assembly]::LoadFile($assemblyPath)
+
 $project_root = Resolve-RootFolder($toolsPath);
 
 $docs_folder = Join-Path -Path $project_root "docs"
