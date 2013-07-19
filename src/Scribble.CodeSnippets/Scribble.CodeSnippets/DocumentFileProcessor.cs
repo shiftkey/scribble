@@ -50,23 +50,28 @@ namespace Scribble.CodeSnippets
 
         public static FileProcessResult Apply(ICollection<CodeSnippet> snippets, string inputFile)
         {
-            var result = new FileProcessResult();
-
             var baselineText = File.ReadAllText(inputFile);
+
+            var result = ApplyToText(snippets, baselineText);
+
+            foreach (var missingKey in result.RequiredSnippets)
+            {
+                missingKey.File = inputFile;
+            }
+            return result;
+        }
+
+        public static FileProcessResult ApplyToText(ICollection<CodeSnippet> snippets, string baselineText)
+        {
+            var result = new FileProcessResult();
 
             var missingKeys = CheckMissingKeys(snippets, baselineText);
             if (missingKeys.Any())
             {
-                foreach (var missingKey in missingKeys)
-                {
-                    missingKey.File = inputFile;
-                }
-
                 result.RequiredSnippets = missingKeys;
                 result.Text = baselineText;
                 return result;
             }
-
             foreach (var snippet in snippets)
             {
                 // TODO: this won't change the text 
@@ -84,7 +89,6 @@ namespace Scribble.CodeSnippets
             }
 
             result.Text = baselineText;
-
             return result;
         }
 
