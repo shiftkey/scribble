@@ -19,7 +19,9 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = DocumentFileProcessor.Apply(snippets, inputFile);
 
-            Assert.Equal(File.ReadAllText(expectedFile), result.Text);
+            var expected = File.ReadAllText(expectedFile).FixNewLines();
+            var fixNewLines = result.Text.FixNewLines();
+            Assert.Equal(expected, fixNewLines);
         }
 
         public static IEnumerable<object[]> Scenarios

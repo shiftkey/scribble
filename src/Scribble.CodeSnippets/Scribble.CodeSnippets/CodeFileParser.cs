@@ -10,9 +10,6 @@ namespace Scribble.CodeSnippets
 {
     public class CodeFileParser
     {
-        const string StartRegex = @".*?start\s*code\s*(?<key>[A-Za-z-]*)(?<language>[A-Za-z]*).*?";
-        const string EndRegex = @".*?end\s*code\s*(?<key>[A-Za-z-]*)";
-        const RegexOptions Options = RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline;
         const string LineEnding = "\r\n";
 
         readonly string codeFolder;
@@ -40,8 +37,8 @@ namespace Scribble.CodeSnippets
                     filesMatchingExtensions.AddRange(files);
                 }
             }
-
-            return GetCodeSnippets(filesMatchingExtensions.Distinct());
+            return GetCodeSnippets(filesMatchingExtensions.Where(x => !x.Contains(@"\obj\"))
+                .Distinct());
         }
 
         public static IList<CodeSnippet> GetCodeSnippets(IEnumerable<string> codeFiles)
@@ -55,10 +52,13 @@ namespace Scribble.CodeSnippets
                 using (TimingScope.Start(reading))
                 {
                     contents = File.ReadAllText(file);
-                    if (Regex.Matches(contents, @".*?\s*start\s*code\s*", RegexOptions.Compiled).Count == 0) continue;
+                    if (!contents.Contains("start code "))
+                    {
+                        continue;
+                    }
                 }
 
-                var lines = contents.Split(new[] { "\r\n", "\n " }, StringSplitOptions.None);
+                var lines = contents.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
                 var message = string.Format("Processing '{0}'", file);
                 using (TimingScope.Start(message))
                 {
@@ -88,23 +88,28 @@ namespace Scribble.CodeSnippets
             {
                 var line = lines[i];
 
-                var isStartTag = Regex.Match(line, StartRegex, Options);
-                if (isStartTag.Success)
+                var indexOfStartCode = line.IndexOf("start code ");
+                if (indexOfStartCode != -1)
                 {
+                    var startIndex = indexOfStartCode + 11;
+                    var suffix = line.RemoveStart(startIndex);
+                    var split = suffix.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
                     innerList.Add(new CodeSnippet
                     {
-                        Key = isStartTag.Groups["key"].Value,
+                        Key = split.First(),
                         StartRow = i + 1,
-                        Language = isStartTag.Groups["language"].Value
+                        Language = split.Skip(1).FirstOrDefault()
                     });
                     continue;
                 }
 
-                var isEndTag = Regex.Match(line, EndRegex);
-                if (isEndTag.Success)
+                var indexOfEndCode = line.IndexOf("end code ");
+                if (indexOfEndCode != -1)
                 {
-                    var key = isEndTag.Groups["key"].Value;
-
+                    var startIndex = indexOfEndCode + 9;
+                    var suffix = line.RemoveStart(startIndex);
+                    var split = suffix.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
+                    var key = split.First();
                     var existing = innerList.FirstOrDefault(c => c.Key == key);
                     if (existing == null)
                     {
@@ -123,11 +128,9 @@ namespace Scribble.CodeSnippets
             return innerList;
         }
 
-        static bool IsNotCodeSnippetTag(string s)
+        static bool IsNotCodeSnippetTag(string line)
         {
-            if (Regex.IsMatch(s, StartRegex, Options)) return false;
-            if (Regex.IsMatch(s, EndRegex, Options)) return false;
-            return true;
+            return !line.Contains("end code ") && !line.Contains("start code ");
         }
     }
 }

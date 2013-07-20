@@ -43,6 +43,7 @@ build/
 *.log
 *.scc
 
+
 # Visual C++ cache files
 ipch/
 *.aps
@@ -70,7 +71,7 @@ _TeamCity*
 *.dotCover
 
 # NCrunch
-*.ncrunch*
+*ncrunch*
 .*crunch*.local.xml
 
 # Installshield output folder

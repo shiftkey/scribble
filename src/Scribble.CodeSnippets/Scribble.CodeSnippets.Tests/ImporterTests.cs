@@ -52,10 +52,10 @@ namespace Scribble.CodeSnippet.Tests
             CodeImporter.Update(codeFolder, new[] { "*.cs" }, docsFolder);
 
             var indexFile = Path.Combine(directory, @"docs\index.md");
-            var actual = File.ReadAllText(indexFile);
+            var actual = File.ReadAllText(indexFile).FixNewLines();
 
             var outputFile = Path.Combine(directory, @"output.md");
-            var expected = File.ReadAllText(outputFile);
+            var expected = File.ReadAllText(outputFile).FixNewLines();
 
             Assert.Equal(expected, actual);
         }

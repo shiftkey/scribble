@@ -65,8 +65,10 @@
     <None Include="data\use-regexes\source\want\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="DocumentFileProcessorTests.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ImporterTests.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="ValidationTests.cs" />
     <None Include="data\apply-snippets\input.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -98,6 +100,12 @@
     <None Include="data\test-site\source\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\code.cs" />
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\input.md" />
+    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\output.md" />
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\code.cs" />
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md" />
+    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md" />
     <None Include="scenarios\8-SamplePage\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -127,12 +135,6 @@
     <None Include="scenarios\2-UpdateSimpleFileMultipleTimes\input.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\input.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\output.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="scenarios\5-UpdateSimpleFileKeepsSameText\input.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -157,12 +159,6 @@
     <None Include="scenarios\8-SamplePage\output.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\input.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\output.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="data\validation\no-snippets\docs\index.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -170,11 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="scenarios\1-UpdateSimpleFile\code.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="scenarios\3-UpdateSimpleFileOverwritesNextLine\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -195,11 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="scenarios\7-UseAUnitTest\code.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="scenarios\4-UpdateSimpleFileWithArbitrayWhitespaceInCode\code.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

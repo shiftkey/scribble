@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using Scribble.CodeSnippets.Models;
 
 namespace Scribble.CodeSnippets
@@ -92,68 +91,75 @@ namespace Scribble.CodeSnippets
             return result;
         }
 
-        static CodeSnippetReference[] CheckMissingKeys(IEnumerable<CodeSnippet> snippets, string baselineText)
+        public static CodeSnippetReference[] CheckMissingKeys(IEnumerable<CodeSnippet> snippets, string baselineText)
         {
             var foundKeys = snippets.Select(m => m.Key);
-
-            var matches = Regex.Matches(baselineText, @"<!--[\s]*import[\s]*(?<key>[\w-]*)[\s]*-->");
-
-            var expectedKeysGroups = matches.Cast<Match>().Select(m => m.Groups["key"]);
-            var expectedKeys = expectedKeysGroups.Select(k => {
-                    var index = k.Index;
-                    var lineCount = baselineText.Substring(0, index)
-                                                .Count(c => c == '\n') + 1;
-
-                    return new CodeSnippetReference { LineNumber = lineCount, Key = k.Value };
-            });
-            
+            var expectedKeys = FindExpectedKeys(baselineText);
             return expectedKeys.Where(k => !foundKeys.Contains(k.Key)).ToArray();
+        }
+
+        static IEnumerable<CodeSnippetReference> FindExpectedKeys(string baselineText)
+        {
+            var stringReader = new StringReader(baselineText);
+
+            string line;
+            var lineNumber = 0;
+            while ((line = stringReader.ReadLine()) != null)
+            {
+                lineNumber++;
+                var indexOfImportStart = line.IndexOf("<!-- import ");
+
+                if (indexOfImportStart > -1)
+                {
+                    var indexOfImportEnd = line.IndexOf(" -->");
+                    if (indexOfImportEnd > -1)
+                    {
+                        var startIndex = indexOfImportStart + 12;
+                        var key = line.Substring(startIndex, indexOfImportEnd - startIndex);
+                        yield return new CodeSnippetReference
+                        {
+                            LineNumber = lineNumber,
+                            Key = key
+                        };
+                    }
+                }
+            }
         }
 
         static string ProcessMatch(string key, string value, string baseLineText)
         {
             var lookup = string.Format("<!-- import {0} -->", key);
 
-            var codeSnippet = FormatTextAsCodeSnippet(value, lookup);
+            var codeSnippet = FormatTextAsCodeSnippet(value);
 
-            var startIndex = 0;
-            var indexOf = IndexOfOrdinal(baseLineText, lookup, startIndex);
-
-            while (indexOf > -1)
+            var builder = new StringBuilder();
+            using (var reader = new StringReader(baseLineText))
             {
-                var endOfLine = IndexOfOrdinal(baseLineText, LineEnding, indexOf + lookup.Length);
-                if (endOfLine > -1)
+                string line;
+                var eatingCode = false;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    const string blankLine = LineEnding + LineEnding;
-                    var endOfNextLine = IndexOfOrdinal(baseLineText, blankLine, endOfLine);
-                    if (endOfNextLine > -1)
+                    if (eatingCode)
                     {
-                        var start = endOfLine + 2;
-                        var end = (endOfNextLine + 4) - start;
-
-                        baseLineText = baseLineText.Remove(start, end);
-                    }
-                    else
-                    {
-                        if (endOfLine != baseLineText.Length)
+                        if (line.StartsWith("    ") || line.StartsWith("\t"))
                         {
-                            endOfNextLine = baseLineText.Length;
-                            baseLineText = baseLineText.Remove(endOfLine, endOfNextLine - endOfLine);
+                            continue;   
                         }
+                        eatingCode = false;
+                    }
+                    builder.AppendLine(line);
+                    if (line.Contains(lookup))
+                    {
+                        builder.AppendLine(codeSnippet);
+                        eatingCode = true;
                     }
                 }
-
-                startIndex = indexOf + lookup.Length;
-
-                baseLineText = baseLineText.Remove(indexOf, lookup.Length)
-                                           .Insert(indexOf, codeSnippet);
-
-                indexOf = IndexOfOrdinal(baseLineText, lookup, startIndex);
             }
-            return baseLineText;
+
+            return builder.ToString().TrimTrailingNewLine();
         }
 
-        static string FormatTextAsCodeSnippet(string value, string lookup)
+        static string FormatTextAsCodeSnippet(string value)
         {
             var valueWithoutEndings = value.TrimEnd('\r', '\n');
 
@@ -170,10 +176,8 @@ namespace Scribble.CodeSnippets
                                     ? whiteSpaceStartValues.Min()
                                     : 0;
 
-            var processedLines = string.Join(LineEnding,
+            return string.Join(LineEnding,
                 linesInFile.Select(l => TrimWhiteSpace(l, minWhiteSpace, 4)));
-
-            return string.Format("{0}{2}{1}{2}", lookup, processedLines, LineEnding);
         }
 
         // as soon as we find a non-space character, bail out
@@ -209,9 +213,6 @@ namespace Scribble.CodeSnippets
             return sb.ToString();
         }
 
-        static int IndexOfOrdinal(string text, string value, int startIndex)
-        {
-            return text.IndexOf(value, startIndex, StringComparison.Ordinal);
-        }
+
     }
 }
