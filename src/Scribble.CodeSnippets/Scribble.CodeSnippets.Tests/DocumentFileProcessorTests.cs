@@ -59,7 +59,7 @@ namespace Scribble.CodeSnippet.Tests
             Assert.Empty( codeSnippetReferences);
         }
         [Fact]
-        public void LostOfText()
+        public void LotsOfText()
         {
             var codeSnippets = new []
                                {
