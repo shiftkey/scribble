@@ -66,7 +66,9 @@ namespace Scribble.CodeSnippet.Tests
 
             var result = DocumentFileProcessor.Apply(snippets, inputFile);
 
-            Assert.Equal(File.ReadAllText(outputFile), result.Text);
+            var expected = File.ReadAllText(outputFile).FixNewLines();
+            var actual = result.Text.FixNewLines();
+            Assert.Equal(expected, actual);
         }
     }
 }

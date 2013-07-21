@@ -52,6 +52,7 @@
     <Compile Include="Models\ScribbleMessage.cs" />
     <Compile Include="Models\UpdateResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
